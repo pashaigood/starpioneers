@@ -1,0 +1,37 @@
+
+> design@0.0.0 build
+> docusaurus build
+
+[WARNING] The `siteConfig.onBrokenMarkdownLinks` config option is deprecated and will be removed in Docusaurus v4.
+Please migrate and move this option to `siteConfig.markdown.hooks.onBrokenMarkdownLinks` instead.
+[INFO] [en] Creating an optimized production build...
+[WARNING] The `siteConfig.onBrokenMarkdownLinks` config option is deprecated and will be removed in Docusaurus v4.
+Please migrate and move this option to `siteConfig.markdown.hooks.onBrokenMarkdownLinks` instead.
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Client
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Server
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Server: Compiled with some errors in 1.49s
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|C:\projects\Star Pilgrims\Design\node_modules\@docusaurus\mdx-loader\lib\index.js??ruleSet[1].rules[8].use[0]!C:\projects\Star Pilgrims\Design\docs\PlanetUI\ui_components.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Client: Compiled with some errors in 10.78s
+[ERROR] Client bundle compiled with errors therefore further build is impossible.
+Error: MDX compilation failed for file "C:\projects\Star Pilgrims\Design\docs\PlanetUI\ui_components.md"
+Cause: Unexpected character `7` (U+0037) before name, expected a character that can start a name, such as a letter, `$`, or `_`
+Details:
+{
+  "column": 14,
+  "file": "",
+  "message": "Unexpected character `7` (U+0037) before name, expected a character that can start a name, such as a letter, `$`, or `_`",
+  "line": 997,
+  "name": "997:14",
+  "place": {
+    "_bufferIndex": 9,
+    "_index": 0,
+    "line": 997,
+    "column": 14,
+    "offset": 27504
+  },
+  "reason": "Unexpected character `7` (U+0037) before name, expected a character that can start a name, such as a letter, `$`, or `_`",
+  "ruleId": "unexpected-character",
+  "source": "micromark-extension-mdx-jsx",
+  "url": "https://github.com/micromark/micromark-extension-mdx-jsx#unexpected-character-at-expected-expect"
+}

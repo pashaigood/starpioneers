@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Roadmap from '@site/src/components/Roadmap';
 
 import styles from './index.module.css';
 
@@ -19,12 +20,12 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/universe/">
+            to="/universe/">
             🚀 Начать изучение
           </Link>
           <Link
             className="button button--primary button--lg"
-            to="/docs/factions/"
+            to="/factions/"
             style={{ marginLeft: '1rem' }}>
             🌌 Фракции 2218
           </Link>
@@ -81,13 +82,16 @@ function HomepageFeatures() {
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="Документация по дизайну игры Star Pioneers - Звёздные Пионеры">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
-    </Layout>
+    <div className="homepage-starfield">
+      <Layout
+        title={`${siteConfig.title}`}
+        description="Документация по дизайну игры Star Pioneers - Звёздные Пионеры">
+        <HomepageHeader />
+        <main>
+          <Roadmap />
+          <HomepageFeatures />
+        </main>
+      </Layout>
+    </div>
   );
 }

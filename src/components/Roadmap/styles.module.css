@@ -1,0 +1,324 @@
+.roadmapSection {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, rgba(27, 38, 59, 0.5) 0%, rgba(13, 27, 42, 0.5) 100%);
+    border-top: 1px solid rgba(255, 107, 53, 0.2);
+    border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+    margin: 2rem 0;
+}
+
+.roadmapTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.roadmapSubtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #cbd5e0;
+    margin-bottom: 3rem;
+    font-weight: 400;
+}
+
+.roadmapContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 2rem 1rem;
+}
+
+/* Hide scrollbar but keep functionality */
+.roadmapContainer::-webkit-scrollbar {
+    height: 6px;
+}
+
+.roadmapContainer::-webkit-scrollbar-track {
+    background: rgba(27, 38, 59, 0.3);
+}
+
+.roadmapContainer::-webkit-scrollbar-thumb {
+    background: rgba(255, 107, 53, 0.5);
+    border-radius: 3px;
+}
+
+.timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    min-width: max-content;
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.phaseWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width: 180px;
+}
+
+/* Connection Line */
+.connectionLine {
+    position: absolute;
+    top: 60px;
+    left: 100%;
+    width: 2rem;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--line-color) 50%, transparent 100%);
+    z-index: 0;
+}
+
+.connectionLine.completed {
+    --line-color: #10b981;
+}
+
+.connectionLine.active {
+    --line-color: #ff6b35;
+    animation: pulse-line 2s ease-in-out infinite;
+}
+
+.connectionLine.planned {
+    --line-color: #64748b;
+    opacity: 0.5;
+}
+
+@keyframes pulse-line {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Phase Node */
+.phaseNode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.phaseNode:hover {
+    transform: translateY(-8px);
+}
+
+.phaseNode:focus {
+    outline: 2px solid #ff6b35;
+    outline-offset: 4px;
+}
+
+/* Hexagon */
+.hexagon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(37, 58, 82, 0.9) 100%);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid;
+    transition: all 0.3s ease;
+}
+
+.phaseNode.completed .hexagon {
+    border-color: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.phaseNode.active .hexagon {
+    border-color: #ff6b35;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
+    animation: glow-hexagon 2s ease-in-out infinite;
+}
+
+.phaseNode.planned .hexagon {
+    border-color: #64748b;
+    opacity: 0.7;
+}
+
+@keyframes glow-hexagon {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 107, 53, 0.8);
+    }
+}
+
+.phaseNode:hover .hexagon {
+    transform: scale(1.1);
+}
+
+.icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+.phaseNode.completed .icon {
+    color: #10b981;
+}
+
+.phaseNode.active .icon {
+    color: #ff6b35;
+}
+
+.phaseNode.planned .icon {
+    color: #94a3b8;
+}
+
+/* Phase Title */
+.phaseTitle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Status Badge */
+.statusBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.2rem;
+    background: rgba(13, 27, 42, 0.9);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+/* Phase Details */
+.phaseDetails {
+    margin-top: 1rem;
+    background: linear-gradient(135deg, rgba(27, 38, 59, 0.95) 0%, rgba(37, 58, 82, 0.95) 100%);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-width: 250px;
+    animation: slideDown 0.3s ease-out;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cbd5e0;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.bullet {
+    color: #ff6b35;
+    font-size: 1.2rem;
+}
+
+/* Legend */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cbd5e0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.legendIcon {
+    font-size: 1.2rem;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .roadmapTitle {
+        font-size: 2rem;
+    }
+
+    .roadmapSubtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .timeline {
+        gap: 1.5rem;
+    }
+
+    .phaseWrapper {
+        min-width: 140px;
+    }
+
+    .hexagon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .icon {
+        font-size: 2rem;
+    }
+
+    .phaseTitle {
+        font-size: 0.85rem;
+    }
+
+    .phaseDetails {
+        min-width: 200px;
+        padding: 1rem;
+    }
+
+    .legend {
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+}

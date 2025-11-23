@@ -1,97 +1,96 @@
-﻿# Game Systems
+﻿# Игровые системы
 
-**For Developers & Designers**
+**Для разработчиков и дизайнеров**
 
-This section contains detailed technical documentation for the core game systems and mechanics of Star Pioneers.
+Этот раздел содержит детальную техническую документацию основных игровых систем и механик Star Pioneers.
 
-> **Note:** This is technical documentation. If you're here to understand the world and story, start with [The Universe](../1-universe/) or [Characters](../3-characters/) instead.
-
----
-
-## Core Systems
-
-### [Combat](./combat/)
-Real-time space combat mechanics, targeting systems, damage models, and encounter design.
-
-- `combat_design.md` - Core combat mechanics
-- `combat_design_dark_souls.md` - Timing-based combat layer
-- `combat_design_targeted.md` - Target-based combat approach
-
-### [Economy](./economy/)
-Planetary markets, resource trading, supply/demand simulation, and pricing.
-
-- `planetary_economy.md` - Market systems and cargo mechanics
-
-### [Pilots & AI](./pilots/)
-Pilot behavior, decision-making architecture, needs/goals planning, and NPC simulation.
-
-- `pilots.md` - Pilot characteristics and behavior
-- `pilot_to_pirate.md` - Piracy progression mechanics
-- `needs_and_goals_architecture.md` - AI planning system
-- `PILOT_DECISION_ARCHITECTURE.md` - Decision-making framework
-- `README_NEEDS_AND_GOALS.md` - System overview
-- `SUMMARY_NEEDS_AND_GOALS.md` - Quick reference
-
-### [Quests](./quests/)
-Quest generation, director system, hooks, and narrative branching.
-
-- `quest_system.md` - Complete quest architecture
-
-### [Simulation](./simulation/)
-World simulation, celestial mechanics, time systems, and entity management.
-
-- `README_GenericSimulation.md` - Generic simulation framework
-- `stellar_simulation.md` - Star system simulation
-
-### [Planets](./planets/)
-Planet generation, UI interactions, and player-planet mechanics.
-
-- `planets.md` - Planet data and mechanics
-- `planet_ui_and_interactions.md` - UI integration
-- `planet_ui_layout.md` - Layout specifications
-- `planetary-system-plan.md` - System architecture
-
-### [Factions](./factions/)
-Faction reputation systems, wanted mechanics, and political relationships.
-
-- `faction_system.md` - Reputation and faction mechanics
-
-### [General Systems](./general/)
-Cross-cutting systems and integration guides.
-
-- `time_and_calendar_design.md` - Game time and calendar
-- `summary.md` - Systems overview
-- `INTEGRATION_GUIDE.md` - Integration guidelines
+> **Примечание:** Это техническая документация. Если вы хотите понять мир и историю, начните с разделов [Вселенная](../1-universe/) или [Персонажи](../3-characters/).
 
 ---
 
-## Design Philosophy
+## Основные системы
 
-Star Pioneers uses an **emergent narrative** approach where player choices and simulated world events create unique stories. Core design principles:
+### [Боевая система](./combat/)
+Космический бой в реальном времени, системы наведения, модели повреждений и дизайн столкновений.
 
-1. **Player Agency** - Significant choices with meaningful consequences
-2. **Simulation Depth** - NPCs and factions act independently with their own goals
-3. **No Hand-Holding** - Players discover systems and consequences organically
-4. **Moral Complexity** - Few purely good or evil choices
-5. **Systems Interaction** - Combat, economy, reputation, and narrative interweave
+- `combat_design.md` - Основные боевые механики
+- `combat_design_dark_souls.md` - Боевой слой на основе тайминга
+- `combat_design_targeted.md` - Целевой подход к бою
+
+### [Экономика](./economy/)
+Планетарные рынки, торговля ресурсами, симуляция спроса/предложения и ценообразование.
+
+- `planetary_economy.md` - Рыночные системы и механика грузов
+
+### [Пилоты и ИИ](./pilots/)
+Поведение пилотов, архитектура принятия решений, планирование потребностей/целей и симуляция NPC.
+
+- `pilots.md` - Характеристики и поведение пилотов
+- `pilot_to_pirate.md` - Механика перехода к пиратству
+- `needs_and_goals_architecture.md` - Система планирования ИИ
+- `PILOT_DECISION_ARCHITECTURE.md` - Фреймворк принятия решений
+- `README_NEEDS_AND_GOALS.md` - Обзор системы
+- `SUMMARY_NEEDS_AND_GOALS.md` - Краткая справка
+
+### [Квесты](./quests/)
+Генерация квестов, система директора, крючки и нарративные ветвления.
+
+- `quest_system.md` - Полная архитектура квестов
+
+### [Симуляция](./simulation/)
+Симуляция мира, небесная механика, временные системы и управление сущностями.
+
+- `README_GenericSimulation.md` - Общая структура симуляции
+- `stellar_simulation.md` - Симуляция звёздных систем
+
+### [Планеты](./planets/)
+Генерация планет, UI-взаимодействия и механики игрок-планета.
+
+- `planets.md` - Данные и механики планет
+- `planet_ui_and_interactions.md` - Интеграция UI
+- `planet_ui_layout.md` - Спецификации компоновки
+- `planetary-system-plan.md` - Архитектура системы
+
+### [Фракции](./factions/)
+Системы репутации фракций, механики розыска и политические отношения.
+
+- `faction_system.md` - Репутация и механики фракций
+
+### [Общие системы](./general/)
+Кросс-системные элементы и руководства по интеграции.
+
+- `time_and_calendar_design.md` - Игровое время и календарь
+- `summary.md` - Обзор систем
+- `INTEGRATION_GUIDE.md` - Руководство по интеграции
 
 ---
 
-## For Game Designers
+## Философия дизайна
 
-If you're designing content (missions, encounters, faction behaviors), focus on:
-- **Quest System** - How to create branching narratives
-- **Faction System** - Reputation and consequence modeling
-- **Economy** - Balancing risk/reward for player choices
+Star Pioneers использует подход **эмерджентного нарратива**, где выборы игрока и симулированные события создают уникальные истории. Основные принципы дизайна:
 
-## For Programmers
-
-If you're implementing systems, key documents:
-- **Simulation** - Core architecture
-- **Pilots/AI** - Behavior tree and planning system
-- **Integration Guide** - How systems connect
+1. **Свобода действий игрока** - Значимые выборы с осмысленными последствиями
+2. **Глубина симуляции** - NPC и фракции действуют независимо с собственными целями
+3. **Без подсказок** - Игроки открывают системы и последствия органически
+4. **Моральная сложность** - Мало чисто хороших или плохих выборов
+5. **Взаимодействие систем** - Бой, экономика, репутация и нарратив переплетаются
 
 ---
 
-*This documentation assumes familiarity with Unity, C#, and game systems architecture.*
+## Для геймдизайнеров
 
+Если вы создаёте контент (миссии, столкновения, поведение фракций), сосредоточьтесь на:
+- **Системе квестов** - Как создавать ветвящиеся нарративы
+- **Системе фракций** - Моделирование репутации и последствий
+- **Экономике** - Балансировка риска/награды для выборов игрока
+
+## Для программистов
+
+Если вы реализуете системы, ключевые документы:
+- **Симуляция** - Основная архитектура
+- **Пилоты/ИИ** - Дерево поведения и система планирования
+- **Руководство по интеграции** - Как связаны системы
+
+---
+
+*Эта документация предполагает знакомство с Unity, C# и архитектурой игровых систем.*

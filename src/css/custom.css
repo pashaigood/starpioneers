@@ -93,8 +93,9 @@ body {
 }
 
 /* Modern Starfield - Multiple layers with different sizes and animations */
-body::before,
-body::after {
+/* Only on homepage */
+.homepage-starfield::before,
+.homepage-starfield::after {
   content: '';
   position: fixed;
   top: 0;
@@ -105,7 +106,7 @@ body::after {
   z-index: 0;
 }
 
-body::before {
+.homepage-starfield::before {
   background-image:
     radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
     radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
@@ -117,7 +118,7 @@ body::before {
   animation: float 60s ease-in-out infinite;
 }
 
-body::after {
+.homepage-starfield::after {
   background-image:
     radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
     radial-gradient(circle at 25% 70%, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
@@ -358,6 +359,19 @@ h6 {
   color: #ff6b35 !important;
   font-weight: 700;
   box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+}
+
+/* Sidebar category arrows/chevrons */
+.menu__list-item-collapsible .menu__link--sublist-caret::after,
+.menu__link--sublist::after {
+  background-color: #ff6b35 !important;
+  filter: brightness(1.2);
+}
+
+.menu__list-item-collapsible:hover .menu__link--sublist-caret::after,
+.menu__link--sublist:hover::after {
+  background-color: #ff8a65 !important;
+  filter: brightness(1.4);
 }
 
 /* Links */

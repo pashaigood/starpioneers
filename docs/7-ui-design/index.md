@@ -1,85 +1,84 @@
-﻿# UI Design
+﻿# Дизайн интерфейса
 
-**Interface Specifications & Component Architecture**
+**Спецификации интерфейса и архитектура компонентов**
 
-This section contains detailed UI/UX design documentation for Star Pioneers interface systems.
-
----
-
-## Planet Card Interface
-
-The Planet Card is the primary interface for planet-side interactions—refueling, repairs, trading, missions, and takeoff.
-
-### Documentation
-
-- **[UI Components](./planet-card/ui_components.md)** - Detailed component specifications
-- **[Architecture](./planet-card/architecture.md)** - System architecture and data flow
-- **[Data Flow](./planet-card/data_flow.md)** - How data moves through the UI
-- **[USS/UXML Specification](./planet-card/uss_uxml_specification.md)** - Unity UI Toolkit implementation
-
-### Design Principles
-
-**Lore Integration**  
-The interface reflects the in-universe aesthetic: functional, space-faring equipment with worn textures and practical layouts.
-
-**Immediate Feedback**  
-Every player action results in immediate visual or audio feedback. No silent failures.
-
-**Contextual Information**  
-UI elements display relevant information without cluttering the screen. Tooltips and progressive disclosure keep the interface clean.
-
-**Accessibility**  
-Full keyboard navigation, screen reader support, high-contrast mode, and reduced motion options.
+Этот раздел содержит детальную UI/UX документацию для интерфейсных систем Star Pioneers.
 
 ---
 
-## Other UI Systems
+## Интерфейс карточки планеты
 
-*(Coming soon)*
+Карточка планеты — это основной интерфейс для взаимодействий на планете: заправка, ремонт, торговля, миссии и взлёт.
 
-- **Space Navigation UI** - Jump planning, route visualization
-- **Combat HUD** - Targeting, damage indicators, tactical displays
-- **Inventory & Cargo** - Ship management interface
-- **Dialogue System** - Conversation UI and choice presentation
-- **Map & Navigation** - System map, waypoints, faction territories
+### Документация
 
----
+- **[UI-компоненты](./planet-card/ui_components.md)** - Детальные спецификации компонентов
+- **[Архитектура](./planet-card/architecture.md)** - Архитектура системы и поток данных
+- **[Поток данных](./planet-card/data_flow.md)** - Как данные проходят через UI
+- **[USS/UXML спецификация](./planet-card/uss_uxml_specification.md)** - Реализация Unity UI Toolkit
 
-## Visual Style Guide
+### Принципы дизайна
 
-**Color Palette:**
-- Primary: Deep space blues
-- Accents: Cyan highlights (jump tech aesthetic)
-- Warning: Amber/Orange
-- Danger: Red
-- Success: Green
+**Интеграция с лором**  
+Интерфейс отражает внутриигровую эстетику: функциональное космическое оборудование с потёртыми текстурами и практичными компоновками.
 
-**Typography:**
-- Headers: Bold, clear sans-serif
-- Body: Readable monospaced for data
-- UI Labels: Uppercase, condensed
+**Немедленная обратная связь**  
+Каждое действие игрока приводит к немедленной визуальной или звуковой обратной связи. Нет тихих ошибок.
 
-**Spacing & Layout:**
-- 8px grid system
-- Generous padding for touch/click targets
-- Minimize nesting depth
+**Контекстная информация**  
+UI-элементы отображают релевантную информацию без захламления экрана. Подсказки и прогрессивное раскрытие сохраняют интерфейс чистым.
+
+**Доступность**  
+Полная навигация с клавиатуры, поддержка программ чтения с экрана, режим высокой контрастности и опции уменьшения движения.
 
 ---
 
-## Implementation Notes
+## Другие UI-системы
 
-All UI is built using **Unity UI Toolkit** (formerly UIElements):
-- UXML for structure
-- USS for styling
-- C# controllers for logic
+*(Скоро появится)*
 
-This allows for:
-- Responsive layouts
-- Runtime theme switching
-- Easy localization
-- Performance optimization
+- **UI космической навигации** - Планирование прыжков, визуализация маршрутов
+- **Боевой HUD** - Наведение, индикаторы повреждений, тактические дисплеи
+- **Инвентарь и груз** - Интерфейс управления кораблём
+- **Система диалогов** - UI разговоров и представление выборов
+- **Карта и навигация** - Карта системы, путевые точки, территории фракций
 
 ---
 
-*For technical implementation details, see individual component specifications.*
+## Руководство по визуальному стилю
 
+**Цветовая палитра:**
+- Основной: Глубокий космический синий
+- Акценты: Cyan подсветка (эстетика прыжковых технологий)
+- Предупреждение: Янтарный/Оранжевый
+- Опасность: Красный
+- Успех: Зелёный
+
+**Типографика:**
+- Заголовки: Жирный, чёткий sans-serif
+- Основной текст: Читаемый моноширинный для данных
+- UI-метки: Заглавные буквы, сжатый
+
+**Отступы и компоновка:**
+- Сетка 8px
+- Щедрые отступы для областей касания/клика
+- Минимизация глубины вложенности
+
+---
+
+## Заметки по реализации
+
+Весь UI построен с использованием **Unity UI Toolkit** (ранее UIElements):
+- UXML для структуры
+- USS для стилей
+- C# контроллеры для логики
+
+Это позволяет:
+- Адаптивные макеты
+- Переключение темы во время выполнения
+- Простую локализацию
+- Оптимизацию производительности
+
+---
+
+*Для технических деталей реализации смотрите спецификации отдельных компонентов.*

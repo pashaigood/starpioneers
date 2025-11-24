@@ -12,54 +12,62 @@ interface RoadmapPhase {
 const roadmapData: RoadmapPhase[] = [
     {
         id: 1,
-        title: 'Основа',
-        status: 'active',
+        title: 'Прототип 1',
+        status: 'completed',
         icon: '🚀',
         features: [
             'Механики полёта',
-            'Прыжковые двигатели',
-            'Базовая кастомизация',
-            'Система прогрессии',
+            'Генерация планет',
+            'Экономика и торговля',
         ],
     },
     {
         id: 2,
-        title: 'Вселенная',
-        status: 'planned',
-        icon: '🌌',
+        title: 'Прототип 2',
+        status: 'active',
+        icon: '🚀',
         features: [
-            'Генерация планет',
-            'Система фракций',
-            'Экономика и торговля',
-            'Звёздные системы',
+            'Базовая кастомизация',
+            'Система прогрессии',
+            'Космический бой',
+            'Динамические квесты',
         ],
     },
     {
         id: 3,
+        title: 'Вселенная',
+        status: 'planned',
+        icon: '🌌',
+        features: [
+            'Система фракций',
+            'Звёздные системы',
+            'Прыжковые двигатели',
+        ],
+    },
+    {
+        id: 4,
         title: 'Конфликты',
         status: 'planned',
         icon: '⚔️',
         features: [
-            'Космический бой',
             'Пиратство',
             'Войны фракций',
             'Охота за головами',
         ],
     },
     {
-        id: 4,
+        id: 5,
         title: 'Нарратив',
         status: 'planned',
         icon: '📖',
         features: [
             'Основная кампания',
-            'Динамические квесты',
             'Персонажи',
             'Ветвящиеся сюжеты',
         ],
     },
     {
-        id: 5,
+        id: 6,
         title: 'Расширение',
         status: 'planned',
         icon: '🔧',
@@ -67,11 +75,10 @@ const roadmapData: RoadmapPhase[] = [
             'Новые системы',
             'Классы кораблей',
             'Продвинутая кастомизация',
-            'Мультиплеер',
         ],
     },
     {
-        id: 6,
+        id: 7,
         title: 'Запуск',
         status: 'planned',
         icon: '🎯',
@@ -131,18 +138,17 @@ export default function Roadmap(): React.JSX.Element {
                                 </div>
 
                                 {/* Expanded Details */}
-                                {activePhase === phase.id && (
-                                    <div className={styles.phaseDetails}>
-                                        <ul className={styles.featureList}>
-                                            {phase.features.map((feature, idx) => (
-                                                <li key={idx} className={styles.featureItem}>
-                                                    <span className={styles.bullet}>▸</span>
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
+                                {/* Expanded Details – always visible */}
+                                <div className={styles.phaseDetails}>
+                                    <ul className={styles.featureList}>
+                                        {phase.features.map((feature, idx) => (
+                                            <li key={idx} className={styles.featureItem}>
+                                                <span className={styles.bullet}>{phase.status === 'completed' ? '✅' : phase.status === 'active' ? '🔄' : '📋'}</span>
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         ))}
                     </div>

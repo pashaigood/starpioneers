@@ -1,5 +1,5 @@
 .roadmapSection {
-    padding: 4rem 0;
+    padding: 6rem 0;
     background: linear-gradient(135deg, rgba(27, 38, 59, 0.5) 0%, rgba(13, 27, 42, 0.5) 100%);
     border-top: 1px solid rgba(255, 107, 53, 0.2);
     border-bottom: 1px solid rgba(255, 107, 53, 0.2);
@@ -29,21 +29,98 @@
     margin: 0 auto;
     overflow-x: auto;
     overflow-y: visible;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 3rem 1rem;
 }
 
-/* Hide scrollbar but keep functionality */
+/* Enhanced scrollbar styling */
 .roadmapContainer::-webkit-scrollbar {
-    height: 6px;
+    height: 20px;
 }
 
 .roadmapContainer::-webkit-scrollbar-track {
-    background: rgba(27, 38, 59, 0.3);
+    background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(13, 27, 42, 0.9) 100%);
+    border: 2px solid rgba(255, 107, 53, 0.4);
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .roadmapContainer::-webkit-scrollbar-thumb {
-    background: rgba(255, 107, 53, 0.5);
-    border-radius: 3px;
+    background: linear-gradient(90deg,
+            rgba(255, 107, 53, 0.6) 0%,
+            rgba(255, 107, 53, 0.9) 20%,
+            rgba(255, 107, 53, 1) 50%,
+            rgba(255, 107, 53, 0.9) 80%,
+            rgba(255, 107, 53, 0.6) 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 107, 53, 0.7);
+    position: relative;
+    box-shadow:
+        0 0 15px rgba(255, 107, 53, 0.5),
+        inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Grip lines effect on thumb */
+.roadmapContainer::-webkit-scrollbar-thumb::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 12px;
+    background: repeating-linear-gradient(0deg,
+            rgba(255, 255, 255, 0.3) 0px,
+            rgba(255, 255, 255, 0.3) 2px,
+            transparent 2px,
+            transparent 4px);
+}
+
+.roadmapContainer::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg,
+            rgba(255, 107, 53, 0.8) 0%,
+            rgba(255, 107, 53, 1) 20%,
+            rgba(255, 140, 80, 1) 50%,
+            rgba(255, 107, 53, 1) 80%,
+            rgba(255, 107, 53, 0.8) 100%);
+    box-shadow:
+        0 0 25px rgba(255, 107, 53, 0.8),
+        inset 0 0 8px rgba(255, 255, 255, 0.4);
+    cursor: grab;
+}
+
+.roadmapContainer::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 107, 53, 1);
+    box-shadow:
+        0 0 30px rgba(255, 107, 53, 1),
+        inset 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: grabbing;
+}
+
+/* Scrollbar buttons (arrows) */
+.roadmapContainer::-webkit-scrollbar-button {
+    width: 30px;
+    height: 20px;
+    background: linear-gradient(135deg, rgba(27, 38, 59, 0.9) 0%, rgba(37, 58, 82, 0.9) 100%);
+    border: 2px solid rgba(255, 107, 53, 0.5);
+    border-radius: 5px;
+}
+
+.roadmapContainer::-webkit-scrollbar-button:hover {
+    background: linear-gradient(135deg, rgba(37, 48, 69, 1) 0%, rgba(47, 68, 92, 1) 100%);
+    border-color: rgba(255, 107, 53, 0.8);
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+}
+
+.roadmapContainer::-webkit-scrollbar-button:horizontal:decrement {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="%23ff6b35" d="M10 2 L4 8 L10 14" stroke="%23ff6b35" stroke-width="2" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.roadmapContainer::-webkit-scrollbar-button:horizontal:increment {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="%23ff6b35" d="M6 2 L12 8 L6 14" stroke="%23ff6b35" stroke-width="2" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .timeline {
@@ -320,5 +397,9 @@
     .legend {
         gap: 1rem;
         font-size: 0.85rem;
+    }
+
+    .roadmapContainer::-webkit-scrollbar {
+        height: 14px;
     }
 }

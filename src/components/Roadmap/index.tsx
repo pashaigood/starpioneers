@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css';
 
+interface Feature {
+    name: string;
+    status: 'completed' | 'active' | 'planned';
+}
+
 interface RoadmapPhase {
     id: number;
     title: string;
     status: 'completed' | 'active' | 'planned';
     icon: string;
-    features: string[];
+    features: Feature[];
 }
 
 const roadmapData: RoadmapPhase[] = [
@@ -16,9 +21,9 @@ const roadmapData: RoadmapPhase[] = [
         status: 'completed',
         icon: '🚀',
         features: [
-            'Механики полёта',
-            'Генерация планет',
-            'Экономика и торговля',
+            { name: 'Механики полёта', status: 'completed' },
+            { name: 'Генерация планет', status: 'completed' },
+            { name: 'Экономика и торговля', status: 'completed' },
         ],
     },
     {
@@ -27,10 +32,10 @@ const roadmapData: RoadmapPhase[] = [
         status: 'active',
         icon: '🚀',
         features: [
-            'Базовая кастомизация',
-            'Система прогрессии',
-            'Космический бой',
-            'Динамические квесты',
+            { name: 'Базовая кастомизация', status: 'active' },
+            { name: 'Система прогрессии', status: 'active' },
+            { name: 'Космический бой', status: 'active' },
+            { name: 'Динамические квесты', status: 'planned' },
         ],
     },
     {
@@ -39,9 +44,20 @@ const roadmapData: RoadmapPhase[] = [
         status: 'planned',
         icon: '🌌',
         features: [
-            'Система фракций',
-            'Звёздные системы',
-            'Прыжковые двигатели',
+            { name: 'Система фракций', status: 'planned' },
+            { name: 'Звёздные системы', status: 'planned' },
+            { name: 'Прыжковые двигатели', status: 'planned' },
+        ],
+    },
+
+    {
+        id: 5,
+        title: 'Планета',
+        status: 'planned',
+        icon: '🌍',
+        features: [
+            { name: 'Планетарное строительство', status: 'planned' },
+            { name: 'Квесты поселений', status: 'planned' },
         ],
     },
     {
@@ -50,43 +66,44 @@ const roadmapData: RoadmapPhase[] = [
         status: 'planned',
         icon: '⚔️',
         features: [
-            'Пиратство',
-            'Войны фракций',
-            'Охота за головами',
-        ],
-    },
-    {
-        id: 5,
-        title: 'Нарратив',
-        status: 'planned',
-        icon: '📖',
-        features: [
-            'Основная кампания',
-            'Персонажи',
-            'Ветвящиеся сюжеты',
+            { name: 'Пиратство', status: 'planned' },
+            { name: 'Войны фракций', status: 'planned' },
+            { name: 'Охота за головами', status: 'planned' },
         ],
     },
     {
         id: 6,
-        title: 'Расширение',
+        title: 'Нарратив',
         status: 'planned',
-        icon: '🔧',
+        icon: '📖',
         features: [
-            'Новые системы',
-            'Классы кораблей',
-            'Продвинутая кастомизация',
+            { name: 'Основная кампания', status: 'planned' },
+            { name: 'Персонажи', status: 'planned' },
+            { name: 'Ветвящиеся сюжеты', status: 'planned' },
+            { name: 'База квестов', status: 'planned' },
         ],
     },
     {
         id: 7,
+        title: 'Расширение',
+        status: 'planned',
+        icon: '🔧',
+        features: [
+            { name: 'Новые системы', status: 'planned' },
+            { name: 'Классы кораблей', status: 'planned' },
+            { name: 'Продвинутая кастомизация', status: 'planned' },
+        ],
+    },
+    {
+        id: 8,
         title: 'Запуск',
         status: 'planned',
         icon: '🎯',
         features: [
-            'Оптимизация',
-            'Балансировка',
-            'Локализация',
-            'Релиз',
+            { name: 'Оптимизация', status: 'planned' },
+            { name: 'Балансировка', status: 'planned' },
+            { name: 'Локализация', status: 'planned' },
+            { name: 'Релиз', status: 'planned' },
         ],
     },
 ];
@@ -143,8 +160,10 @@ export default function Roadmap(): React.JSX.Element {
                                     <ul className={styles.featureList}>
                                         {phase.features.map((feature, idx) => (
                                             <li key={idx} className={styles.featureItem}>
-                                                <span className={styles.bullet}>{phase.status === 'completed' ? '✅' : phase.status === 'active' ? '🔄' : '📋'}</span>
-                                                {feature}
+                                                <span className={styles.bullet}>
+                                                    {feature.status === 'completed' ? '✅' : feature.status === 'active' ? '🔄' : '📋'}
+                                                </span>
+                                                {feature.name}
                                             </li>
                                         ))}
                                     </ul>

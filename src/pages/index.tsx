@@ -5,7 +5,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import Roadmap from '@site/src/components/Roadmap';
-
 import styles from './index.module.css';
 
 function HomepageHeader() {

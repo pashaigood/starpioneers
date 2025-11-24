@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-game-systems/pilots/pilot_to_pirate" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">pilot_to_pirate | Star Pioneers</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://github.com/StarPioneers/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://github.com/StarPioneers/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://github.com/StarPioneers/game-systems/pilots/pilot_to_pirate"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="pilot_to_pirate | Star Pioneers"><meta data-rh="true" name="description" content="Как пилот становится пиратом - размышления и гейм-дизайн"><meta data-rh="true" property="og:description" content="Как пилот становится пиратом - размышления и гейм-дизайн"><link data-rh="true" rel="icon" href="/StarPioneers/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://github.com/StarPioneers/game-systems/pilots/pilot_to_pirate"><link data-rh="true" rel="alternate" href="https://github.com/StarPioneers/game-systems/pilots/pilot_to_pirate" hreflang="en"><link data-rh="true" rel="alternate" href="https://github.com/StarPioneers/game-systems/pilots/pilot_to_pirate" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Игровые системы","item":"https://github.com/StarPioneers/game-systems/"},{"@type":"ListItem","position":2,"name":"Pilots - Design notes (game-design level)","item":"https://github.com/StarPioneers/game-systems/pilots/"},{"@type":"ListItem","position":3,"name":"pilot_to_pirate","item":"https://github.com/StarPioneers/game-systems/pilots/pilot_to_pirate"}]}</script><link rel="stylesheet" href="/StarPioneers/assets/css/styles.2251e703.css">
+<script src="/StarPioneers/assets/js/runtime~main.6e82f6e4.js" defer="defer"></script>
+<script src="/StarPioneers/assets/js/main.176202b6.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/StarPioneers/img/logo.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/StarPioneers/"><div class="navbar__logo"><img src="/StarPioneers/img/logo.png" alt="Star Pioneers Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/StarPioneers/img/logo.png" alt="Star Pioneers Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Star Pioneers</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/StarPioneers/universe/">ДизДок</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/pashaigood/starpioneers" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/StarPioneers/universe/"><span title="Вселенная" class="categoryLinkLabel_W154">Вселенная</span></a><button aria-label="Expand sidebar category &#x27;Вселенная&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/StarPioneers/factions/"><span title="Фракции 2218 года" class="categoryLinkLabel_W154">Фракции 2218 года</span></a><button aria-label="Expand sidebar category &#x27;Фракции 2218 года&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/StarPioneers/characters/"><span title="Персонажи" class="categoryLinkLabel_W154">Персонажи</span></a><button aria-label="Expand sidebar category &#x27;Персонажи&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/StarPioneers/locations/"><span title="Локации" class="categoryLinkLabel_W154">Локации</span></a><button aria-label="Expand sidebar category &#x27;Локации&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/StarPioneers/narrative/"><span title="Нарратив и квесты" class="categoryLinkLabel_W154">Нарратив и квесты</span></a><button aria-label="Expand sidebar category &#x27;Нарратив и квесты&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/StarPioneers/game-systems/"><span title="Игровые системы" class="categoryLinkLabel_W154">Игровые системы</span></a><button aria-label="Collapse sidebar category &#x27;Игровые системы&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/StarPioneers/game-systems/economy/planetary_economy"><span title="economy" class="categoryLinkLabel_W154">economy</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/StarPioneers/game-systems/factions/faction_system"><span title="factions" class="categoryLinkLabel_W154">factions</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/StarPioneers/game-systems/general/INTEGRATION_GUIDE"><span title="general" class="categoryLinkLabel_W154">general</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/StarPioneers/game-systems/pilots/"><span title="Pilots - Design notes (game-design level)" class="categoryLinkLabel_W154">Pilots - Design notes (game-design level)</span></a><button aria-label="Collapse sidebar category &#x27;Pilots - Design notes (game-design level)&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/StarPioneers/game-systems/pilots/PILOT_DECISION_ARCHITECTURE"><span title="Архитектура принятия решений пилота" class="linkLabel_WmDU">Архитектура принятия решений пилота</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/StarPioneers/game-systems/pilots/README_NEEDS_AND_GOALS"><span title="Система потребностей и целей пилотов" class="linkLabel_WmDU">Система потребностей и целей пилотов</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/StarPioneers/game-systems/pilots/SUMMARY_NEEDS_AND_GOALS"><span title="Система потребностей и целей - Summary" class="linkLabel_WmDU">Система потребностей и целей - Summary</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/StarPioneers/game-systems/pilots/needs_and_goals_architecture"><span title="Архитектура системы потребностей и целей пилотов" class="linkLabel_WmDU">Архитектура системы потребностей и целей пилотов</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/StarPioneers/game-systems/pilots/pilot_to_pirate"><span title="pilot_to_pirate" class="linkLabel_WmDU">pilot_to_pirate</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/StarPioneers/game-systems/planets/"><span title="Planets - MVP (design, non-code)" class="categoryLinkLabel_W154">Planets - MVP (design, non-code)</span></a><button aria-label="Expand sidebar category &#x27;Planets - MVP (design, non-code)&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/StarPioneers/game-systems/quests/quest_system"><span title="quests" class="categoryLinkLabel_W154">quests</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/StarPioneers/game-systems/simulation/README_GenericSimulation"><span title="simulation" class="categoryLinkLabel_W154">simulation</span></a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/StarPioneers/ui-design/"><span title="Дизайн интерфейса" class="categoryLinkLabel_W154">Дизайн интерфейса</span></a><button aria-label="Expand sidebar category &#x27;Дизайн интерфейса&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/StarPioneers/"><span title="Star Pioneers / Звёздные Пионеры - Документация по дизайну" class="linkLabel_WmDU">Star Pioneers / Звёздные Пионеры - Документация по дизайну</span></a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/StarPioneers/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/StarPioneers/game-systems/"><span>Игровые системы</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/StarPioneers/game-systems/pilots/"><span>Pilots - Design notes (game-design level)</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">pilot_to_pirate</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>pilot_to_pirate</h1></header><h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="как-пилот-становится-пиратом---размышления-и-гейм-дизайн">Как пилот становится пиратом - размышления и гейм-дизайн<a href="#как-пилот-становится-пиратом---размышления-и-гейм-дизайн" class="hash-link" aria-label="Direct link to Как пилот становится пиратом - размышления и гейм-дизайн" title="Direct link to Как пилот становится пиратом - размышления и гейм-дизайн" translate="no">​</a></h2>
+<p>Цель: собрать выводы из материалов в <code>Assets/Design</code> и предложить игровые механики, сюжетные триггеры и характеристики, которые ведут от &quot;обычного пилота&quot; к пиратству. Материал основан на <code>planetary_economy.md</code>, <code>quest_system.md</code>, <code>pilots.md</code>, <code>planets.md</code>, <code>bible.md</code>, <code>lore/black_market_eden5.md</code> и примерах в <code>QuestSamples</code>.</p>
+<hr>
+<p><strong>Краткая идея</strong>: переход пилота в пиратство - это не одномоментный выбор, а кривая решений и накопленных обстоятельств: экономическое давление, возможности подполья, личностные черты, события (потеря, предательство, отчаяние), а также доступность инфраструктуры контрабанды и пиратских братств.</p>
+<p><strong>Источники и сигналы в мире</strong>:</p>
+<ul>
+<li class=""><strong>Экономика</strong>: пилоты зависят от торговли, маржи и доставки (<code>planetary_economy.md</code>). Низкие доходы, большая волатильность, отсутствие контрактов стимулируют рискованные действия.</li>
+<li class=""><strong>Потребности и планировщик пилота</strong>: потребности (Hunger, Entertainment, кредиты) и ShipNeeds (топливо, ремонт) заставляют вставлять EarnMoney/Refuel цели; отсутствие денег → поиски нелегальных заработков (<code>needs_and_goals_architecture.md</code>, <code>pilots.md</code>).</li>
+<li class=""><strong>Квесты/_hooks</strong>: Composer/Director выдаёт hooks (см. <code>QuestSamples</code>) - smuggling, convoy, informant - они естественно предоставляют легальный/нелегальный выбор.</li>
+<li class=""><strong>Подполье</strong>: Noir-Triada, Helios Clinics, Kern Logistics и pirate brotherhoods - рынки и контакты, дающие опции для преступлений (<code>SettingBible/factions</code>, <code>lore/black_market_eden5.md</code>).</li>
+</ul>
+<hr>
+<ol>
+<li class="">Пути и ключевые триггеры превращения</li>
+</ol>
+<ul>
+<li class=""><strong>Экономический крах / долг</strong>: пилот теряет сбережения (провал миссии, штрафы, личные долги). Нужда в больших суммах создаёт мотивацию принять смелое, высокооплачиваемое, но нелегальное задание (smuggling, contraband missions).</li>
+<li class=""><strong>Столкновение с системой</strong>: жёсткие правила Федерации, конфискации, несправедливые наказания - пилот теряет веру в систему и начинает искать альтернативные сети (ноар-триада, подпольные клиники).</li>
+<li class=""><strong>Социальная связка / вербовка</strong>: знакомство с информантом, контрабандистом или бывшим пиратом (hook → talk_informant_planetA, hook_smuggling) открывает контакты и постоянный доход.</li>
+<li class=""><strong>Крушение / потеря работы</strong>: например, крушение при миссии (см. Eden-5) - потеря фрахта, изоляция, доступ к тёмным рынкам.</li>
+<li class=""><strong>Моральный компромисс шаг за шагом</strong>: сначала мелкая контрабанда, затем саботаж охраны, нападение на конвои; каждое действие увеличивает wanted-level / репутацию у подполья.</li>
+</ul>
+<ol start="2">
+<li class="">Игровые действия и решения, которые ведут в пиратство</li>
+</ol>
+<ul>
+<li class=""><strong>Судоходная контрабанда</strong> (smuggling): брать запрещённые грузы, выбирать рискованные маршруты; успешные рейсы повышают доверие подполья и доступ к лучшим заданиям.</li>
+<li class=""><strong>Отказ помогать законам / саботаж</strong>: игрок может саботировать маяки или порубить каналы связи (повышает шанс успешного ограбления/контрабанды).</li>
+<li class=""><strong>Вооружённые налёты</strong>: атаки на маленькие торговые флоты; переход от скрытной к открытой преступной активности.</li>
+<li class=""><strong>Организация сети</strong>: найм пилотов-наёмников, обустройство тайников и тайных баз (игровой шаг к капитализации преступного бизнеса).</li>
+</ul>
+<ol start="3">
+<li class="">Характеристики и параметры, способствующие пиратству</li>
+</ol>
+<ul>
+<li class=""><strong>Личностные черты</strong>: высокая Greed, низкая Caution, низкая Loyalty/High Independence, высокая Aggression - увеличивают склонность к принятию рискованных контрактов (<code>planetary_economy.md</code>, <code>pilots.md</code>).</li>
+<li class=""><strong>Навыки</strong>: высокий TradingSkill (для оценки маржи), высокий CombatSkill и Pilot Skill (для угона/погони), Engineering для быстрых правок/модернизаций корабля.</li>
+<li class=""><strong>Корабль</strong>: большая CargoCapacity (для контрабанды), модификации для уклонения от сканеров, усиленное вооружение и быстрые двигатели - техническая предпосылка.</li>
+<li class=""><strong>Социальные связи</strong>: контакты в Noir-Triada / Kern / Helios - дают доступ к заданиям и апгрейдам.</li>
+</ul>
+<ol start="4">
+<li class="">Система репутации и wanted-уровень (гейм-механика)</li>
+</ol>
+<ul>
+<li class=""><strong>Два измерения репутации</strong>: (1) официальная - отношение к Федерациям/станциям; (2) подпольная - рейтинг у пиратских братств/брокеров.</li>
+<li class=""><strong>Wanted score</strong>: увеличивается при нападениях/перехватах/невыплатах. Высокий wanted → усиленные патрули / награды на голову → меняет доступные варианты (скрытые точки, более рискованные маршруты).</li>
+<li class=""><strong>Экономический профиль</strong>: игроку становится выгоднее действовать вне закона, когда свободный доход легальных путей меньше ожидаемой прибыли от пиратства с учётом риска.</li>
+</ul>
+<ol start="5">
+<li class="">Прогрессия превращения (пример стадий)</li>
+</ol>
+<ul>
+<li class=""><strong>Stage 0 - Курьер/наёмник</strong>: выполняет легальные доставки и мелкие поручения. Параметры: низкая репутация у подполья, нормальный доход.</li>
+<li class=""><strong>Stage 1 - Участник контрабанды</strong>: принимает smuggling hooks (hook_smuggling, fetch_delivery). Получает доступ к подпольным магазинам/Helios услугам; начинают появляться первые moral choice точки.</li>
+<li class=""><strong>Stage 2 - Опасный контрабандист / рейдер</strong>: совершает нападения на малые грузы, участвует в confrontations; wanted ↑; открываются бродячие задания от pirate brotherhoods.</li>
+<li class=""><strong>Stage 3 - Организатор/капитан банды</strong>: владеет сетью тайников, нанимает NPC, ведёт крупные налёты и контроль участков трафика; отношения с фракциями становятся стратегическими.</li>
+</ul>
+<ol start="6">
+<li class="">Примеры квест-цепочек, подтягивающие игрока к пиратству</li>
+</ol>
+<ul>
+<li class="">Hook: <code>hook_smuggling</code> → Choice: accept (smuggling route) or refuse. Accept → <code>investigation_market</code> → <code>confrontation_pursuit</code> (escalation) → <code>climax_standoff</code> → <code>aftermath_reputation_shift</code>. Последние шаги могут дать либо укрепление подполья (если player sides with smugglers), либо официальное преследование.</li>
+<li class="">Convoy hooks: <code>hook_convoy_notice</code> → watch_convoy → choice: attack convoy (gain loot/rep with pirates) or warn convoy (gain Federation rep). Такие выборы прямо двигают игрока в противоположные направления.</li>
+</ul>
+<ol start="7">
+<li class="">Баланс и контрмеры (рекомендации)</li>
+</ol>
+<ul>
+<li class=""><strong>Баланс риска/дохода</strong>: подсчитать expected_value = profit * (1 - loss_prob) - expected_costs (fines, ship loss). Должен быть точечный момент, где нелегальные задания кажутся рациональными.</li>
+<li class=""><strong>Инструменты правосудия</strong>: bounty systems, patrol escalation, возможность сдаться/сдать доказательства (redemption paths). Возможность амнистии или перехода в частично легальные схемы (партнёрство с TransGate) - даёт игровые ветви.</li>
+<li class=""><strong>Ограничение доступности</strong>: доступ к серьёзным пиратским операциям требует сетей, тайников, и доверия (trust thresholds в QuestSamples). Это предотвращает мгновенное &quot;фармилово&quot;.</li>
+</ul>
+<ol start="8">
+<li class="">Реализация в системах проекта (имплементация)</li>
+</ol>
+<ul>
+<li class=""><strong>WorldState/Director</strong>: выдаёт hooks, следит за глобальной wanted статистикой и spawn патрулей (см. <code>quest_system.md</code>).</li>
+<li class=""><strong>PilotModel</strong>: добавить поле <code>Lawfulness</code> / <code>WantedScore</code> и decision modifiers (Greed/Caution) для торговых/преступных выборов.</li>
+<li class=""><strong>MarketModule</strong>: подпольные рынки (Helios/Noir) как отдельные MarketModule с риском транзакций и premium на препараты/модули.</li>
+<li class=""><strong>Simulated consequences</strong>: Composer должен симулировать последствия выбора (ex: open_hooks, reputation patches). Использовать существующий Validator/Simulator.</li>
+</ul>
+<ol start="9">
+<li class="">Игровые сцены и драматические моменты (для сценаристов)</li>
+</ol>
+<ul>
+<li class="">Утечка директивы Валена → моральный выбор: продать информацию подполью или передать Федерации.</li>
+<li class="">Потеря конвоя/крушение (Eden-5) → пилот остаётся без средств и вынужден идти в подполье.</li>
+<li class="">Сцена вербовки: доверенный информант предлагает крупный рейд с высоким риском/наградой.</li>
+</ul>
+<ol start="10">
+<li class="">Краткие next steps для реализации</li>
+</ol>
+<ul>
+<li class="">Добавить <code>pilot.WantedScore</code> и <code>pilot.Lawfulness</code> в <code>PilotModel</code>.</li>
+<li class="">Реализовать подпольные MarketModules (Helios/Noir) с методами <code>OfferBlackMarketTrade()</code> и риском detection.</li>
+<li class="">Прописать новые QuestSamples/branches, где эскалация идёт от smuggling → violent → gang leadership.</li>
+<li class="">Ввести telemetry: track number of illegal jobs completed, current wanted score, pirate-faction rep.</li>
+</ul>
+<hr>
+<p>Файл подготовлен как дизайн-обзор и план для программистов и сценаристов. Могу доработать: 1) конкретные числовые пороги (wanted thresholds, payouts), 2) карточки NPC-вербовщиков, 3) диалоговые узлы для <code>hook_smuggling</code> и <code>talk_informant_planetA</code> под пиратские ветки.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="технический-план-как-pilotmodelcs-может-эволюционировать-в-пиратство-для-программистов">Технический план: как <code>PilotModel.cs</code> может эволюционировать в пиратство (для программистов)<a href="#технический-план-как-pilotmodelcs-может-эволюционировать-в-пиратство-для-программистов" class="hash-link" aria-label="Direct link to технический-план-как-pilotmodelcs-может-эволюционировать-в-пиратство-для-программистов" title="Direct link to технический-план-как-pilotmodelcs-может-эволюционировать-в-пиратство-для-программистов" translate="no">​</a></h2>
+<p>Ниже - подробный, практически ориентированный план изменений в кодовой базе, данных и интеграции. Цель - чтобы NPC-пилоты могли автономно переходить от законопослушного поведения к криминальному через симуляционную логику, без ручного скриптинга.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-перенос-данных-отношенийрепутации-в-систему-faction">1) Перенос данных отношений/репутации в систему <code>Faction</code><a href="#1-перенос-данных-отношенийрепутации-в-систему-faction" class="hash-link" aria-label="Direct link to 1-перенос-данных-отношенийрепутации-в-систему-faction" title="Direct link to 1-перенос-данных-отношенийрепутации-в-систему-faction" translate="no">​</a></h3>
+<p>Важно: вместо хранения всех полей репутации/wanted/trust в каждом <code>PilotModel</code> мы централизуем это в универсальном классе/сервисе <code>Faction</code>/<code>FactionManager</code>. <code>PilotModel</code> хранит только ссылку/ID на связанные фракции и краткие derived-поля (кэшированные) - а вся политическая/криминальная статистика по каждому пилоту хранится в <code>Faction</code>.</p>
+<p>Причины:</p>
+<ul>
+<li class="">Унификация (репутация - концепт фракций, не отдельных пилотов).</li>
+<li class="">Удобство баланса и репликации: фракция контролирует свои параметры (включая PirateFaction как частный случай).</li>
+<li class="">Лёгкость для Director/Composer - все запросы по репутации идут к Faction API.</li>
+</ul>
+<p>Что переносится в <code>Faction</code>:</p>
+<ul>
+<li class=""><code>WantedScorePerPilot</code> (map pilotId -&gt; float) - текущий уровень розыска против данного пилота у этой фракции/юрисдикции.</li>
+<li class=""><code>ReputationPerPilot</code> (map pilotId -&gt; float) - модель репутации/лояльности.</li>
+<li class=""><code>TrustPerPilot</code> (map pilotId -&gt; float) - доверие подполья/контактов (CriminalNetworkTrust теперь per-faction or per-network).</li>
+<li class=""><code>IllegalJobHistoryPerPilot</code> (map pilotId -&gt; JobStats) - счетчики успешных/проваленных illegal jobs связаны с фракцией.</li>
+</ul>
+<p>Что остаётся в <code>PilotModel</code>:</p>
+<ul>
+<li class="">Поля, относящиеся к способности и личности (Greed, Caution, Skills, ShipModel refs).</li>
+<li class="">Короткоживущие кэши (например, lastKnownWantedEstimate) - для оптимизации; всё изменяемое фактическое состояние за репутацией идёт в <code>Faction</code>.</li>
+</ul>
+<p>Требования: добавить persistence для <code>Faction</code> (ScriptableObject + runtime state), и защищать все изменения под общей синхронизацией в WorldState / FactionManager (thread-safe).</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="дизайн-faction-кратко">Дизайн <code>Faction</code> (кратко)<a href="#дизайн-faction-кратко" class="hash-link" aria-label="Direct link to дизайн-faction-кратко" title="Direct link to дизайн-faction-кратко" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p>Базовый класс <code>Faction</code>:</p>
+<ul>
+<li class="">id, name, type (enum: LegalAuthority, PirateNetwork, Broker, Corp)</li>
+<li class="">methods:<!-- -->
+<ul>
+<li class=""><code>float GetReputation(Guid pilotId)</code></li>
+<li class=""><code>void AdjustReputation(Guid pilotId, float delta)</code></li>
+<li class=""><code>float GetTrust(Guid pilotId)</code></li>
+<li class=""><code>void AdjustTrust(Guid pilotId, float delta)</code></li>
+<li class=""><code>float GetWanted(Guid pilotId)</code></li>
+<li class=""><code>void AdjustWanted(Guid pilotId, float delta, DetectionContext ctx)</code></li>
+<li class=""><code>List&lt;IllegalOffer&gt; GetOffersForPilot(Guid pilotId, PilotSnapshot snapshot)</code> (for pirate networks)</li>
+</ul>
+</li>
+<li class="">internal storages: maps for per-pilot values, persisted in world save.</li>
+</ul>
+</li>
+<li class="">
+<p><code>PirateFaction : Faction</code> (specialization)</p>
+<ul>
+<li class="">extra API: <code>RegisterIllegalOffer(...)</code>, <code>GetNetworkMultiplier()</code>, <code>IssueSafehouse(pilotId)</code>, policy for when to reduce detection risk for trusted pilots.</li>
+<li class="">policy fields: <code>minTrustForMajorJobs</code>, <code>trustGainOnSuccess</code>, <code>trustLossOnFailure</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Интеграция: все вызовы к репутации/wanted идут через <code>FactionManager</code> (singleton/service) и только он модифицирует maps; <code>PilotModel</code> делает <code>FactionManager.Query(...)</code> при принятии решений.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-новые-типы-целей-goals">2) Новые типы целей (Goals)<a href="#2-новые-типы-целей-goals" class="hash-link" aria-label="Direct link to 2) Новые типы целей (Goals)" title="Direct link to 2) Новые типы целей (Goals)" translate="no">​</a></h3>
+<ul>
+<li class=""><code>SmuggleRunGoal</code> - stealth delivery, использует BlackMarketModule и route concealment.</li>
+<li class=""><code>FenceGoodsGoal</code> - продажа украденного/контрабандного груза через <code>BlackMarketModule</code>.</li>
+<li class=""><code>RaidConvoyGoal</code> - open combat raid on convoy (requires CombatSkill checks and appropriate ship capabilities).</li>
+<li class=""><code>EstablishSafehouseGoal</code> - инвентарь/тайник creation (долгосрочная цель, требует капитал).</li>
+</ul>
+<p>Каждый illegalGoal реализуется как GoalChain: [EnsureSupportGoals (refuel/hide) → ExecuteIllegalAction → Escape/Dispose].</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-blackmarketmodule-marketmodule-variant">3) <code>BlackMarketModule</code> (MarketModule variant)<a href="#3-blackmarketmodule-marketmodule-variant" class="hash-link" aria-label="Direct link to 3-blackmarketmodule-marketmodule-variant" title="Direct link to 3-blackmarketmodule-marketmodule-variant" translate="no">​</a></h3>
+<ul>
+<li class="">Функции:<!-- -->
+<ul>
+<li class=""><code>GetIllegalOffer(itemId, qty)</code> → returns <code>{price, baseDetectionRisk, minTrust}</code></li>
+<li class=""><code>TryBlackBuy(pilotId, itemId, qty)</code> / <code>TryBlackSell(...)</code> → атомарно изменяют стоки и возвращают success + detectionOutcome</li>
+</ul>
+</li>
+<li class="">Параметры: <code>illegalPricePremium</code>, <code>liquidity</code>, <code>detectionBase</code>.</li>
+<li class="">Реализация: как <code>MarketModule</code> с дополнительными полями для <code>detectionRisk</code> и <code>isIllegal=true</code>.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-piracydecisionmodule---модуль-принятия-решений-новый-класс">4) <code>PiracyDecisionModule</code> - модуль принятия решений (новый класс)<a href="#4-piracydecisionmodule---модуль-принятия-решений-новый-класс" class="hash-link" aria-label="Direct link to 4-piracydecisionmodule---модуль-принятия-решений-новый-класс" title="Direct link to 4-piracydecisionmodule---модуль-принятия-решений-новый-класс" translate="no">​</a></h3>
+<ul>
+<li class="">Задача: оценивать доступные illegalOffers и решать, брать ли их (enqueue illegal goals).</li>
+<li class="">Входы: Pilot state (Credits, ship, Greed/Caution/Lawfulness, PirateStage, CriminalNetworkTrust), WorldState (nearby offers, patrolDensity, director hooks), Offer metadata.</li>
+<li class="">Вычисления:<!-- -->
+<ul>
+<li class=""><code>expectedProfit = offer.EstimateProfit(pilot)</code></li>
+<li class=""><code>expectedLoss = offer.EstimateLoss(pilot)</code> (включая вероятность потери ship/cargo)</li>
+<li class=""><code>detectionRisk = offer.baseDetection + world.PatrolDensity(route) - pilot.StealthModifiers</code></li>
+<li class=""><code>trustBenefit = pilot.CriminalNetworkTrust * offer.NetworkMultiplier</code></li>
+<li class=""><code>moralityPenalty = pilot.Lawfulness * moralWeight</code></li>
+</ul>
+</li>
+<li class="">Utility (пример):
+<code>utility = expectedProfit*(1+Greed) - expectedLoss*(1-Caution) - detectionRisk*riskWeight + trustBenefit - moralityPenalty</code></li>
+<li class="">Решение: если <code>utility &gt;= threshold(stage, offer.complexity)</code> И <code>CriminalNetworkTrust &gt;= offer.minTrust</code> → accept job → <code>Planner.PushGoal(offer.ToGoalChain())</code>.</li>
+<li class="">Дополнительно: при успешном выполнении <code>IllegalJobsCompleted++</code>, <code>CriminalNetworkTrust += deltaTrust</code>, возможный апгрейт <code>PirateStage</code>.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-интеграция-с-pilotgoalplanner">5) Интеграция с <code>PilotGoalPlanner</code><a href="#5-интеграция-с-pilotgoalplanner" class="hash-link" aria-label="Direct link to 5-интеграция-с-pilotgoalplanner" title="Direct link to 5-интеграция-с-pilotgoalplanner" translate="no">​</a></h3>
+<ul>
+<li class="">В <code>PlanNextGoal()</code> вызывать <code>PiracyDecisionModule.Evaluate()</code> перед генерацией стандартных lawful goals.</li>
+<li class="">Illegal goals вставляются в очередь как GoalChains с support goals (Refuel, Repair, Hide). Планировщик должен уметь резервировать safehouse/dock через <code>CelestialModel</code> API.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-wanted-system-и-реакция-правоохранительных-органов">6) Wanted system и реакция правоохранительных органов<a href="#6-wanted-system-и-реакция-правоохранительных-органов" class="hash-link" aria-label="Direct link to 6) Wanted system и реакция правоохранительных органов" title="Direct link to 6) Wanted system и реакция правоохранительных органов" translate="no">​</a></h3>
+<ul>
+<li class="">Логика:<!-- -->
+<ul>
+<li class=""><code>WantedScore += baseWantedForCrime * detectionSeverity</code> при detection</li>
+<li class="">Если <code>WantedScore &gt;= bountyThreshold</code> → Director создаёт bounty + увеличивает patrolDensity в секторах, где пилот активен</li>
+<li class="">WantedScore естественно снижается (decay) при отсутствии новых преступлений</li>
+</ul>
+</li>
+<li class="">Patrol AI подписан на WorldState и target&#x27;ит ships с высоким WantedScore (probabilistic targeting).</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="7-piratestage-progression-и-trust-механика">7) PirateStage progression и trust механика<a href="#7-piratestage-progression-и-trust-механика" class="hash-link" aria-label="Direct link to 7) PirateStage progression и trust механика" title="Direct link to 7) PirateStage progression и trust механика" translate="no">​</a></h3>
+<ul>
+<li class="">Примеры порогов:<!-- -->
+<ul>
+<li class="">Stage1: <code>IllegalJobsCompleted &gt;= 1</code></li>
+<li class="">Stage2: <code>IllegalJobsCompleted &gt;= 5 &amp;&amp; CriminalNetworkTrust &gt;= 0.4</code></li>
+<li class="">Stage3: <code>IllegalJobsCompleted &gt;= 15 &amp;&amp; CriminalNetworkTrust &gt;= 0.75</code></li>
+</ul>
+</li>
+<li class="">Consequence: Stage unlocks larger illegalOffers, lowers some internal thresholds, но повышает внимание law enforcement.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="8-конфигурация-и-тюнинг-scriptableobject">8) Конфигурация и тюнинг (ScriptableObject)<a href="#8-конфигурация-и-тюнинг-scriptableobject" class="hash-link" aria-label="Direct link to 8) Конфигурация и тюнинг (ScriptableObject)" title="Direct link to 8) Конфигурация и тюнинг (ScriptableObject)" translate="no">​</a></h3>
+<ul>
+<li class="">Создать <code>PiracyConfig</code> ScriptableObject с параметрами: <code>piracyThresholdBase</code>, <code>stageMultipliers[]</code>, <code>trustDecayRate</code>, <code>wantedDecayRate</code>, <code>detectionBase</code>, <code>illegalPricePremium</code>, <code>patrolInfluence</code>.</li>
+<li class="">Дизайнеры меняют значения в инспекторе для балансировки.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="9-telemetry-debug-и-тесты">9) Telemetry, Debug и тесты<a href="#9-telemetry-debug-и-тесты" class="hash-link" aria-label="Direct link to 9) Telemetry, Debug и тесты" title="Direct link to 9) Telemetry, Debug и тесты" translate="no">​</a></h3>
+<ul>
+<li class="">Telemetry: log events (pilotId, offerId, utilityValue, decision, result, wantedDelta).</li>
+<li class="">Debug UI: показать utility-breakdown, currentOffers, pilot trust/wanted/stage, force values.</li>
+<li class="">Unit tests:<!-- -->
+<ul>
+<li class="">utility calculation with deterministic inputs</li>
+<li class="">progression of PirateStage after sequence of successes/failures</li>
+<li class="">WantedScore increase/decay</li>
+</ul>
+</li>
+<li class="">Integration tests:<!-- -->
+<ul>
+<li class="">pilot with low credits accepts illegalOffer and planner enqueues <code>SmuggleRunGoal</code>.</li>
+<li class="">detection triggers bounty and Director spawns patrol.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="10-безопасность-и-edge-cases">10) Безопасность и edge cases<a href="#10-безопасность-и-edge-cases" class="hash-link" aria-label="Direct link to 10) Безопасность и edge cases" title="Direct link to 10) Безопасность и edge cases" translate="no">​</a></h3>
+<ul>
+<li class="">Не допускать мгновенной массовой конверсии: require <code>minTrust</code> и staged unlocks.</li>
+<li class="">При уничтожении/удалении BlackMarket node - пилоты ищут альтернативы или возвращаются к lawful routes.</li>
+<li class="">Thread safety: все изменения полей пилота под <code>model.Sync</code>.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="11-roadmap-задачиприоритеты">11) Roadmap (задачи/приоритеты)<a href="#11-roadmap-задачиприоритеты" class="hash-link" aria-label="Direct link to 11) Roadmap (задачи/приоритеты)" title="Direct link to 11) Roadmap (задачи/приоритеты)" translate="no">​</a></h3>
+<ol>
+<li class="">Implement <code>Faction</code> system + migrate reputation/wanted/trust storage (high priority)</li>
+<li class="">Implement basic <code>BlackMarketModule</code> + seed illegal offers (data)</li>
+<li class="">Implement <code>IllegalJobOffer</code> DTO and Director hook to spawn offers</li>
+<li class="">Implement <code>PiracyDecisionModule</code> and integrate with <code>PilotGoalPlanner</code></li>
+<li class="">Add <code>SmuggleRunGoal</code> and <code>FenceGoodsGoal</code> (MVP illegal goals)</li>
+<li class="">Wanted system integration with Director/Patrols (uses Faction.Wanted maps)</li>
+<li class="">Telemetry, Debug UI and Tuning</li>
+</ol>
+<hr>
+<p><strong>См. также</strong>: подробный дизайн системы фракций - <code>Assets/Design/faction_system.md</code> (репутация, wanted, trust, API и интеграция для PirateFaction).</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/StarPioneers/game-systems/pilots/needs_and_goals_architecture"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Архитектура системы потребностей и целей пилотов</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/StarPioneers/game-systems/planets/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Planets - MVP (design, non-code)</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#как-пилот-становится-пиратом---размышления-и-гейм-дизайн" class="table-of-contents__link toc-highlight">Как пилот становится пиратом - размышления и гейм-дизайн</a></li><li><a href="#технический-план-как-pilotmodelcs-может-эволюционировать-в-пиратство-для-программистов" class="table-of-contents__link toc-highlight">Технический план: как <code>PilotModel.cs</code> может эволюционировать в пиратство (для программистов)</a><ul><li><a href="#1-перенос-данных-отношенийрепутации-в-систему-faction" class="table-of-contents__link toc-highlight">1) Перенос данных отношений/репутации в систему <code>Faction</code></a></li><li><a href="#дизайн-faction-кратко" class="table-of-contents__link toc-highlight">Дизайн <code>Faction</code> (кратко)</a></li><li><a href="#2-новые-типы-целей-goals" class="table-of-contents__link toc-highlight">2) Новые типы целей (Goals)</a></li><li><a href="#3-blackmarketmodule-marketmodule-variant" class="table-of-contents__link toc-highlight">3) <code>BlackMarketModule</code> (MarketModule variant)</a></li><li><a href="#4-piracydecisionmodule---модуль-принятия-решений-новый-класс" class="table-of-contents__link toc-highlight">4) <code>PiracyDecisionModule</code> - модуль принятия решений (новый класс)</a></li><li><a href="#5-интеграция-с-pilotgoalplanner" class="table-of-contents__link toc-highlight">5) Интеграция с <code>PilotGoalPlanner</code></a></li><li><a href="#6-wanted-system-и-реакция-правоохранительных-органов" class="table-of-contents__link toc-highlight">6) Wanted system и реакция правоохранительных органов</a></li><li><a href="#7-piratestage-progression-и-trust-механика" class="table-of-contents__link toc-highlight">7) PirateStage progression и trust механика</a></li><li><a href="#8-конфигурация-и-тюнинг-scriptableobject" class="table-of-contents__link toc-highlight">8) Конфигурация и тюнинг (ScriptableObject)</a></li><li><a href="#9-telemetry-debug-и-тесты" class="table-of-contents__link toc-highlight">9) Telemetry, Debug и тесты</a></li><li><a href="#10-безопасность-и-edge-cases" class="table-of-contents__link toc-highlight">10) Безопасность и edge cases</a></li><li><a href="#11-roadmap-задачиприоритеты" class="table-of-contents__link toc-highlight">11) Roadmap (задачи/приоритеты)</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/StarPioneers/">Home</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Star Pioneers. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

@@ -4,8 +4,8 @@
 
 param(
     [string]$VersionMessage = "",
-    [switch]$SkipBuild = $false,
-    [switch]$DryRun = $false
+    [switch]$NoPush = $false,
+    [switch]$KeepTemp = $false
 )
 
 # Color output functions
@@ -17,6 +17,9 @@ function Write-Warning { Write-Host "[WARNING] $args" -ForegroundColor Yellow }
 # Error handling
 $ErrorActionPreference = "Stop"
 
+# Variable to track temp directory for cleanup
+$tempRepoPath = $null
+
 try {
     # Get current directory
     $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -24,66 +27,23 @@ try {
 
     Write-Info "Starting GitHub Pages deployment process..."
 
-    # 1. Check for uncommitted changes
-    Write-Info "Checking for uncommitted changes..."
-    $gitStatus = git status --porcelain
-    if ($gitStatus -and -not $DryRun) {
-        Write-Warning "You have uncommitted changes in your working directory:"
-        git status --short
-        $response = Read-Host "Do you want to continue? (y/N)"
-        if ($response -ne 'y' -and $response -ne 'Y') {
-            Write-Error "Deployment cancelled by user"
-            exit 1
-        }
+    # 1. Verify build directory exists
+    if (-not (Test-Path "build")) {
+        Write-Error "Build directory does not exist. Run 'npm run build' first."
+        exit 1
     }
 
-    # Get current branch name
-    $currentBranch = git rev-parse --abbrev-ref HEAD
-    Write-Info "Current branch: $currentBranch"
-
-    # Get current commit hash for reference
-    $currentCommit = git rev-parse HEAD
-    Write-Info "Current commit: $currentCommit"
-
-    # 2. Build the project
-    if (-not $SkipBuild) {
-        Write-Info "Building Docusaurus site..."
-        
-        # Clean previous build
-        if (Test-Path "build") {
-            Write-Info "Cleaning previous build directory..."
-            Remove-Item -Recurse -Force "build"
-        }
-
-        # Run build
-        npm run build
-        
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Build failed with exit code $LASTEXITCODE"
-            exit $LASTEXITCODE
-        }
-        
-        Write-Success "Build completed successfully"
-    } else {
-        Write-Warning "Skipping build (using existing build directory)"
-        if (-not (Test-Path "build")) {
-            Write-Error "Build directory does not exist. Run without -SkipBuild flag."
-            exit 1
-        }
-    }
-
-    # Verify build directory exists and has content
     if (-not (Test-Path "build/index.html")) {
         Write-Error "Build directory is missing index.html. Build may have failed."
         exit 1
     }
 
-    # 3. Prepare version information
+    # 2. Prepare version information
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $version = Get-Date -Format "yyyy.MM.dd.HHmm"
     
     if ([string]::IsNullOrWhiteSpace($VersionMessage)) {
-        $VersionMessage = "Deploy version $version from $currentBranch"
+        $VersionMessage = "Deploy version $version"
     } else {
         $VersionMessage = "Deploy v${version}: $VersionMessage"
     }
@@ -91,133 +51,151 @@ try {
     Write-Info "Version: $version"
     Write-Info "Commit message: $VersionMessage"
 
-    if ($DryRun) {
-        Write-Warning "DRY RUN MODE - No changes will be committed"
-        Write-Info "Build directory contents:"
-        Get-ChildItem -Path "build" -Recurse -File | Select-Object -First 10 | ForEach-Object { Write-Host "  $_" }
-        Write-Success "Dry run completed successfully"
-        exit 0
+    # 3. Get git remote URL (if exists)
+    $ErrorActionPreference = "SilentlyContinue"
+    $remoteUrl = git config --get remote.origin.url
+    $hasRemote = $LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($remoteUrl)
+    $ErrorActionPreference = "Stop"
+
+    if ($hasRemote) {
+        Write-Info "Remote origin found: $remoteUrl"
+    } else {
+        Write-Warning "No remote origin configured. Will prepare files locally only."
     }
 
-    # 4. Switch to gh-pages branch
-    Write-Info "Switching to gh-pages branch..."
-    
-    # Check if gh-pages branch exists
-    $branchExists = git rev-parse --verify gh-pages 2>$null
-    
-    if ($LASTEXITCODE -eq 0) {
-        # Branch exists, switch to it
-        git checkout gh-pages
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to checkout gh-pages branch"
-            exit $LASTEXITCODE
+    # 4. Create temporary directory for gh-pages repo
+    $tempRepoPath = Join-Path $env:TEMP "ghpages-deploy-$(Get-Date -Format 'yyyyMMddHHmmss')"
+    Write-Info "Creating temporary directory: $tempRepoPath"
+    New-Item -ItemType Directory -Path $tempRepoPath -Force | Out-Null
+
+    # 5. Clone or initialize repository in temp directory
+    Set-Location $tempRepoPath
+
+    if ($hasRemote) {
+        Write-Info "Cloning repository to temp directory..."
+        
+        # Try to clone gh-pages branch
+        $ErrorActionPreference = "SilentlyContinue"
+        git clone --branch gh-pages --single-branch --depth 1 $remoteUrl . 2>$null
+        $cloneSuccess = $LASTEXITCODE -eq 0
+        $ErrorActionPreference = "Stop"
+
+        if (-not $cloneSuccess) {
+            # gh-pages branch doesn't exist, create orphan branch
+            Write-Info "gh-pages branch doesn't exist, creating new orphan branch..."
+            
+            $ErrorActionPreference = "SilentlyContinue"
+            git clone --depth 1 $remoteUrl . 2>$null
+            $mainCloneSuccess = $LASTEXITCODE -eq 0
+            $ErrorActionPreference = "Stop"
+            
+            if (-not $mainCloneSuccess) {
+                Write-Error "Failed to clone repository. Check your remote URL and access rights."
+                exit 1
+            }
+            
+            git checkout --orphan gh-pages
+            git rm -rf . 2>$null
+        } else {
+            Write-Success "Cloned existing gh-pages branch"
         }
     } else {
-        # Branch doesn't exist, create it as orphan
-        Write-Info "Creating new gh-pages branch (orphan)..."
-        git checkout --orphan gh-pages
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to create gh-pages branch"
-            exit $LASTEXITCODE
-        }
-        
-        # Remove all files from the new orphan branch
-        git rm -rf . 2>$null
+        # No remote, just initialize a new repo
+        Write-Info "Initializing new git repository..."
+        git init
+        git checkout -b gh-pages
     }
 
-    Write-Success "Switched to gh-pages branch"
-
-    # 5. Clean gh-pages branch (keep .git directory)
-    Write-Info "Cleaning gh-pages branch..."
-    
+    # 6. Clean the temp repo (keep .git)
+    Write-Info "Cleaning temporary repository..."
     Get-ChildItem -Path . -Exclude ".git" | ForEach-Object {
         Remove-Item -Recurse -Force $_.FullName
     }
 
-    # 6. Copy build files to gh-pages branch
-    Write-Info "Copying build files to gh-pages branch..."
-    
-    # Copy all files from build directory to root
-    Copy-Item -Path "build\*" -Destination "." -Recurse -Force
-    
+    # 7. Copy build files to temp repo
+    Write-Info "Copying build files..."
+    $buildSource = Join-Path $scriptDir "build"
+    Copy-Item -Path "$buildSource\*" -Destination "." -Recurse -Force
+
     Write-Success "Build files copied successfully"
 
-    # 7. Create .nojekyll file (important for GitHub Pages)
+    # 8. Create .nojekyll file (critical for GitHub Pages)
     Write-Info "Creating .nojekyll file..."
     New-Item -Path ".nojekyll" -ItemType File -Force | Out-Null
-    
-    # 8. Create CNAME file if needed (uncomment and modify if you have a custom domain)
-    # Write-Info "Creating CNAME file..."
-    # "your-domain.com" | Out-File -FilePath "CNAME" -Encoding ASCII -NoNewline
 
-    # 9. Add all files to git
+    # 9. Add and commit all files
     Write-Info "Adding files to git..."
     git add -A
-    
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed to add files to git"
-        exit $LASTEXITCODE
-    }
 
     # Check if there are changes to commit
-    $hasChanges = git diff --staged --quiet
-    if ($LASTEXITCODE -eq 0) {
-        Write-Warning "No changes to commit"
-        git checkout $currentBranch
-        Write-Info "Switched back to $currentBranch"
+    $ErrorActionPreference = "SilentlyContinue"
+    git diff --staged --quiet
+    $hasChanges = $LASTEXITCODE -ne 0
+    $ErrorActionPreference = "Stop"
+
+    if (-not $hasChanges) {
+        Write-Warning "No changes to commit. Build is identical to last deployment."
+        Set-Location $scriptDir
         exit 0
     }
 
-    # 10. Create commit with version
     Write-Info "Creating commit..."
     git commit -m $VersionMessage
-    
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed to create commit"
-        exit $LASTEXITCODE
-    }
 
     Write-Success "Commit created successfully"
 
-    # 11. Show summary
-    Write-Info "═══════════════════════════════════════════════════════"
-    Write-Success "Deployment prepared successfully!"
-    Write-Info "═══════════════════════════════════════════════════════"
-    Write-Info "Branch: gh-pages"
-    Write-Info "Version: $version"
-    Write-Info "Commit: $VersionMessage"
-    Write-Info ""
-    Write-Info "To push to GitHub, run:"
-    Write-Host "  git push origin gh-pages --force" -ForegroundColor Yellow
-    Write-Info ""
-    Write-Info "To return to your original branch, run:"
-    Write-Host "  git checkout $currentBranch" -ForegroundColor Yellow
-    Write-Info "═══════════════════════════════════════════════════════"
-
-    # Ask if user wants to push
-    $pushResponse = Read-Host "Do you want to push to GitHub now? (y/N)"
-    if ($pushResponse -eq 'y' -or $pushResponse -eq 'Y') {
-        Write-Info "Pushing to GitHub..."
+    # 10. Push to remote (if exists and not disabled)
+    if ($hasRemote -and -not $NoPush) {
+        Write-Info "Pushing to remote..."
         git push origin gh-pages --force
-        
+
         if ($LASTEXITCODE -eq 0) {
             Write-Success "Successfully pushed to GitHub!"
             Write-Info "Your site will be available at: https://StarPilgrims.github.io/StarPilgrims/"
         } else {
-            Write-Error "Failed to push to GitHub"
+            Write-Error "Failed to push to remote"
+            exit 1
         }
+    } elseif ($NoPush) {
+        Write-Warning "Push skipped (--NoPush flag set)"
+        Write-Info "To push manually, run:"
+        Write-Host "  cd '$tempRepoPath'" -ForegroundColor Yellow
+        Write-Host "  git push origin gh-pages --force" -ForegroundColor Yellow
+    } else {
+        Write-Warning "No remote configured, skipping push"
     }
 
-    # Ask if user wants to return to original branch
-    $checkoutResponse = Read-Host "Return to $currentBranch branch? (Y/n)"
-    if ($checkoutResponse -ne 'n' -and $checkoutResponse -ne 'N') {
-        git checkout $currentBranch
-        Write-Success "Returned to $currentBranch branch"
+    # 11. Show summary
+    Write-Info "═══════════════════════════════════════════════════════"
+    Write-Success "Deployment completed successfully!"
+    Write-Info "═══════════════════════════════════════════════════════"
+    Write-Info "Version: $version"
+    Write-Info "Commit: $VersionMessage"
+    Write-Info "Temp directory: $tempRepoPath"
+    
+    if ($hasRemote -and -not $NoPush) {
+        Write-Info "Status: Pushed to remote"
+    } else {
+        Write-Info "Status: Prepared locally"
     }
+    
+    Write-Info "═══════════════════════════════════════════════════════"
+
+    # Return to original directory
+    Set-Location $scriptDir
 
 } catch {
     Write-Error "An error occurred: $_"
-    Write-Info "Attempting to return to original branch..."
-    git checkout $currentBranch 2>$null
+    Set-Location $scriptDir
     exit 1
+} finally {
+    # Clean up temp directory (unless --KeepTemp flag is set)
+    if ($tempRepoPath -and (Test-Path $tempRepoPath) -and -not $KeepTemp) {
+        Write-Info "Cleaning up temporary directory..."
+        Set-Location $scriptDir
+        Remove-Item -Recurse -Force $tempRepoPath -ErrorAction SilentlyContinue
+        Write-Success "Cleanup completed"
+    } elseif ($KeepTemp -and $tempRepoPath) {
+        Write-Warning "Temporary directory preserved: $tempRepoPath"
+    }
 }

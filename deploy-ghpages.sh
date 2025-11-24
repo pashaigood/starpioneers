@@ -11,15 +11,15 @@ YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-info() { echo -e "${CYAN}ℹ️  $1${NC}"; }
-success() { echo -e "${GREEN}✅ $1${NC}"; }
-error() { echo -e "${RED}❌ $1${NC}"; }
-warning() { echo -e "${YELLOW}⚠️  $1${NC}"; }
+info() { echo -e "${CYAN}[INFO] $1${NC}"; }
+success() { echo -e "${GREEN}[SUCCESS] $1${NC}"; }
+error() { echo -e "${RED}[ERROR] $1${NC}"; }
+warning() { echo -e "${YELLOW}[WARNING] $1${NC}"; }
 
 # Parse arguments
 VERSION_MESSAGE=""
-SKIP_BUILD=false
-DRY_RUN=false
+NO_PUSH=false
+KEEP_TEMP=false
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -27,12 +27,12 @@ while [[ $# -gt 0 ]]; do
             VERSION_MESSAGE="$2"
             shift 2
             ;;
-        --skip-build)
-            SKIP_BUILD=true
+        --no-push)
+            NO_PUSH=true
             shift
             ;;
-        --dry-run)
-            DRY_RUN=true
+        --keep-temp)
+            KEEP_TEMP=true
             shift
             ;;
         *)
@@ -42,162 +42,151 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEMP_REPO_PATH=""
+
+# Cleanup function
+cleanup() {
+    if [ -n "$TEMP_REPO_PATH" ] && [ -d "$TEMP_REPO_PATH" ] && [ "$KEEP_TEMP" != true ]; then
+        info "Cleaning up temporary directory..."
+        cd "$SCRIPT_DIR"
+        rm -rf "$TEMP_REPO_PATH"
+        success "Cleanup completed"
+    elif [ "$KEEP_TEMP" = true ] && [ -n "$TEMP_REPO_PATH" ]; then
+        warning "Temporary directory preserved: $TEMP_REPO_PATH"
+    fi
+}
+
+# Set trap for cleanup
+trap cleanup EXIT
+
+cd "$SCRIPT_DIR"
+
 info "Starting GitHub Pages deployment process..."
 
-# 1. Check for uncommitted changes
-info "Checking for uncommitted changes..."
-if [[ -n $(git status --porcelain) ]] && [[ "$DRY_RUN" != true ]]; then
-    warning "You have uncommitted changes in your working directory:"
-    git status --short
-    read -p "Do you want to continue? (y/N) " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        error "Deployment cancelled by user"
-        exit 1
-    fi
+# 1. Verify build directory exists
+if [ ! -d "build" ]; then
+    error "Build directory does not exist. Run 'npm run build' first."
+    exit 1
 fi
 
-# Get current branch name
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-info "Current branch: $CURRENT_BRANCH"
-
-# Get current commit hash
-CURRENT_COMMIT=$(git rev-parse HEAD)
-info "Current commit: $CURRENT_COMMIT"
-
-# 2. Build the project
-if [[ "$SKIP_BUILD" != true ]]; then
-    info "Building Docusaurus site..."
-    
-    # Clean previous build
-    if [ -d "build" ]; then
-        info "Cleaning previous build directory..."
-        rm -rf build
-    fi
-    
-    # Run build
-    npm run build
-    
-    success "Build completed successfully"
-else
-    warning "Skipping build (using existing build directory)"
-    if [ ! -d "build" ]; then
-        error "Build directory does not exist. Run without --skip-build flag."
-        exit 1
-    fi
-fi
-
-# Verify build directory
 if [ ! -f "build/index.html" ]; then
     error "Build directory is missing index.html. Build may have failed."
     exit 1
 fi
 
-# 3. Prepare version information
+# 2. Prepare version information
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
 VERSION=$(date "+%Y.%m.%d.%H%M")
 
 if [ -z "$VERSION_MESSAGE" ]; then
-    VERSION_MESSAGE="Deploy version $VERSION from $CURRENT_BRANCH"
+    VERSION_MESSAGE="Deploy version $VERSION"
 else
-    VERSION_MESSAGE="Deploy v$VERSION: $VERSION_MESSAGE"
+    VERSION_MESSAGE="Deploy v${VERSION}: $VERSION_MESSAGE"
 fi
 
 info "Version: $VERSION"
 info "Commit message: $VERSION_MESSAGE"
 
-if [[ "$DRY_RUN" == true ]]; then
-    warning "DRY RUN MODE - No changes will be committed"
-    info "Build directory contents:"
-    ls -la build | head -n 10
-    success "Dry run completed successfully"
-    exit 0
-fi
+# 3. Get git remote URL (if exists)
+REMOTE_URL=$(git config --get remote.origin.url 2>/dev/null || true)
+HAS_REMOTE=false
 
-# 4. Switch to gh-pages branch
-info "Switching to gh-pages branch..."
-
-# Check if gh-pages branch exists
-if git rev-parse --verify gh-pages >/dev/null 2>&1; then
-    # Branch exists, switch to it
-    git checkout gh-pages
+if [ -n "$REMOTE_URL" ]; then
+    HAS_REMOTE=true
+    info "Remote origin found: $REMOTE_URL"
 else
-    # Branch doesn't exist, create it as orphan
-    info "Creating new gh-pages branch (orphan)..."
-    git checkout --orphan gh-pages
-    
-    # Remove all files from the new orphan branch
-    git rm -rf . 2>/dev/null || true
+    warning "No remote origin configured. Will prepare files locally only."
 fi
 
-success "Switched to gh-pages branch"
+# 4. Create temporary directory for gh-pages repo
+TEMP_REPO_PATH=$(mktemp -d -t ghpages-deploy-XXXXXXXXXX)
+info "Creating temporary directory: $TEMP_REPO_PATH"
 
-# 5. Clean gh-pages branch (keep .git directory)
-info "Cleaning gh-pages branch..."
+# 5. Clone or initialize repository in temp directory
+cd "$TEMP_REPO_PATH"
+
+if [ "$HAS_REMOTE" = true ]; then
+    info "Cloning repository to temp directory..."
+    
+    # Try to clone gh-pages branch
+    if git clone --branch gh-pages --single-branch --depth 1 "$REMOTE_URL" . 2>/dev/null; then
+        success "Cloned existing gh-pages branch"
+    else
+        # gh-pages branch doesn't exist, create orphan branch
+        info "gh-pages branch doesn't exist, creating new orphan branch..."
+        git clone --depth 1 "$REMOTE_URL" . 2>/dev/null
+        git checkout --orphan gh-pages
+        git rm -rf . 2>/dev/null || true
+    fi
+else
+    # No remote, just initialize a new repo
+    info "Initializing new git repository..."
+    git init
+    git checkout -b gh-pages
+fi
+
+# 6. Clean the temp repo (keep .git)
+info "Cleaning temporary repository..."
 find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} + 2>/dev/null || true
 
-# 6. Copy build files to gh-pages branch
-info "Copying build files to gh-pages branch..."
-cp -r build/* .
+# 7. Copy build files to temp repo
+info "Copying build files..."
+cp -r "$SCRIPT_DIR/build/"* .
 
 success "Build files copied successfully"
 
-# 7. Create .nojekyll file (important for GitHub Pages)
+# 8. Create .nojekyll file (critical for GitHub Pages)
 info "Creating .nojekyll file..."
 touch .nojekyll
 
-# 8. Create CNAME file if needed (uncomment and modify if you have a custom domain)
-# info "Creating CNAME file..."
-# echo "your-domain.com" > CNAME
-
-# 9. Add all files to git
+# 9. Add and commit all files
 info "Adding files to git..."
 git add -A
 
 # Check if there are changes to commit
 if git diff --staged --quiet; then
-    warning "No changes to commit"
-    git checkout "$CURRENT_BRANCH"
-    info "Switched back to $CURRENT_BRANCH"
+    warning "No changes to commit. Build is identical to last deployment."
+    cd "$SCRIPT_DIR"
     exit 0
 fi
 
-# 10. Create commit with version
 info "Creating commit..."
 git commit -m "$VERSION_MESSAGE"
 
 success "Commit created successfully"
 
-# 11. Show summary
-info "═══════════════════════════════════════════════════════"
-success "Deployment prepared successfully!"
-info "═══════════════════════════════════════════════════════"
-info "Branch: gh-pages"
-info "Version: $VERSION"
-info "Commit: $VERSION_MESSAGE"
-echo ""
-info "To push to GitHub, run:"
-echo -e "${YELLOW}  git push origin gh-pages --force${NC}"
-echo ""
-info "To return to your original branch, run:"
-echo -e "${YELLOW}  git checkout $CURRENT_BRANCH${NC}"
-info "═══════════════════════════════════════════════════════"
-
-# Ask if user wants to push
-read -p "Do you want to push to GitHub now? (y/N) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    info "Pushing to GitHub..."
+# 10. Push to remote (if exists and not disabled)
+if [ "$HAS_REMOTE" = true ] && [ "$NO_PUSH" != true ]; then
+    info "Pushing to remote..."
     git push origin gh-pages --force
     
     success "Successfully pushed to GitHub!"
     info "Your site will be available at: https://StarPilgrims.github.io/StarPilgrims/"
+elif [ "$NO_PUSH" = true ]; then
+    warning "Push skipped (--no-push flag set)"
+    info "To push manually, run:"
+    echo -e "${YELLOW}  cd '$TEMP_REPO_PATH'${NC}"
+    echo -e "${YELLOW}  git push origin gh-pages --force${NC}"
+else
+    warning "No remote configured, skipping push"
 fi
 
-# Ask if user wants to return to original branch
-read -p "Return to $CURRENT_BRANCH branch? (Y/n) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-    git checkout "$CURRENT_BRANCH"
-    success "Returned to $CURRENT_BRANCH branch"
+# 11. Show summary
+info "═══════════════════════════════════════════════════════"
+success "Deployment completed successfully!"
+info "═══════════════════════════════════════════════════════"
+info "Version: $VERSION"
+info "Commit: $VERSION_MESSAGE"
+info "Temp directory: $TEMP_REPO_PATH"
+
+if [ "$HAS_REMOTE" = true ] && [ "$NO_PUSH" != true ]; then
+    info "Status: Pushed to remote"
+else
+    info "Status: Prepared locally"
 fi
+
+info "═══════════════════════════════════════════════════════"
+
+# Return to original directory
+cd "$SCRIPT_DIR"

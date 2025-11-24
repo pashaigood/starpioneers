@@ -15,14 +15,14 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://github.com', // Placeholder
+  url: 'https://pashaigood.github.io', // Placeholder
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/StarPilgrims/',
+  baseUrl: '/starpioneers/',
 
   // GitHub pages deployment config.
-  organizationName: 'StarPilgrims', // Usually your GitHub org/user name.
-  projectName: 'StarPilgrims', // Usually your repo name.
+  organizationName: 'StarPioneers', // Usually your GitHub org/user name.
+  projectName: 'StarPioneers', // Usually your repo name.
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -53,7 +53,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/docusaurus-social-card.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -71,7 +71,7 @@ const config: Config = {
           label: 'ДизДок',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/pashaigood/starpioneers',
           label: 'GitHub',
           position: 'right',
         },

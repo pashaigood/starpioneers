@@ -4,64 +4,64 @@
 
 Этот раздел содержит детальную техническую документацию основных игровых систем и механик Star Pioneers.
 
-> **Примечание:** Это техническая документация. Если вы хотите понять мир и историю, начните с разделов [Вселенная](../1-universe/) или [Персонажи](../3-characters/).
+> **Примечание:** Это техническая документация. Если вы хотите понять мир и историю, начните с разделов [Вселенная](../1-universe/index.md) или [Персонажи](../3-characters/index.md).
 
 ---
 
 ## Основные системы
 
-### [Боевая система](./combat/)
+### [Боевая система](./combat/combat_design.md)
 Космический бой в реальном времени, системы наведения, модели повреждений и дизайн столкновений.
 
-- `combat_design.md` - Основные боевые механики
-- `combat_design_dark_souls.md` - Боевой слой на основе тайминга
-- `combat_design_targeted.md` - Целевой подход к бою
+- [Основные боевые механики](./combat/combat_design.md)
+- [Боевой слой на основе тайминга](./combat/combat_design_dark_souls.md)
+- [Целевой подход к бою](./combat/combat_design_targeted.md)
 
-### [Экономика](./economy/)
+### [Экономика](./economy/planetary_economy.md)
 Планетарные рынки, торговля ресурсами, симуляция спроса/предложения и ценообразование.
 
-- `planetary_economy.md` - Рыночные системы и механика грузов
+- [Рыночные системы и механика грузов](./economy/planetary_economy.md)
 
-### [Пилоты и ИИ](./pilots/)
+### [Пилоты и ИИ](./pilots/pilots.md)
 Поведение пилотов, архитектура принятия решений, планирование потребностей/целей и симуляция NPC.
 
-- `pilots.md` - Характеристики и поведение пилотов
-- `pilot_to_pirate.md` - Механика перехода к пиратству
-- `needs_and_goals_architecture.md` - Система планирования ИИ
-- `PILOT_DECISION_ARCHITECTURE.md` - Фреймворк принятия решений
-- `README_NEEDS_AND_GOALS.md` - Обзор системы
-- `SUMMARY_NEEDS_AND_GOALS.md` - Краткая справка
+- [Характеристики и поведение пилотов](./pilots/pilots.md)
+- [Механика перехода к пиратству](./pilots/pilot_to_pirate.md)
+- [Система планирования ИИ](./pilots/needs_and_goals_architecture.md)
+- [Фреймворк принятия решений](./pilots/PILOT_DECISION_ARCHITECTURE.md)
+- [Обзор системы](./pilots/README_NEEDS_AND_GOALS.md)
+- [Краткая справка](./pilots/SUMMARY_NEEDS_AND_GOALS.md)
 
-### [Квесты](./quests/)
+### [Квесты](./quests/quest_system.md)
 Генерация квестов, система директора, крючки и нарративные ветвления.
 
-- `quest_system.md` - Полная архитектура квестов
+- [Полная архитектура квестов](./quests/quest_system.md)
 
-### [Симуляция](./simulation/)
+### [Симуляция](./simulation/README_GenericSimulation.md)
 Симуляция мира, небесная механика, временные системы и управление сущностями.
 
-- `README_GenericSimulation.md` - Общая структура симуляции
-- `stellar_simulation.md` - Симуляция звёздных систем
+- [Общая структура симуляции](./simulation/README_GenericSimulation.md)
+- [Симуляция звёздных систем](./simulation/stellar_simulation.md)
 
-### [Планеты](./planets/)
+### [Планеты](./planets/planets.md)
 Генерация планет, UI-взаимодействия и механики игрок-планета.
 
-- `planets.md` - Данные и механики планет
-- `planet_ui_and_interactions.md` - Интеграция UI
-- `planet_ui_layout.md` - Спецификации компоновки
-- `planetary-system-plan.md` - Архитектура системы
+- [Данные и механики планет](./planets/planets.md)
+- [Интеграция UI](./planets/planet_ui_and_interactions.md)
+- [Спецификации компоновки](./planets/planet_ui_layout.md)
+- [Архитектура системы](./planets/planetary-system-plan.md)
 
-### [Фракции](./factions/)
+### [Фракции](./factions/faction_system.md)
 Системы репутации фракций, механики розыска и политические отношения.
 
-- `faction_system.md` - Репутация и механики фракций
+- [Репутация и механики фракций](./factions/faction_system.md)
 
-### [Общие системы](./general/)
+### [Общие системы](./general/summary.md)
 Кросс-системные элементы и руководства по интеграции.
 
-- `time_and_calendar_design.md` - Игровое время и календарь
-- `summary.md` - Обзор систем
-- `INTEGRATION_GUIDE.md` - Руководство по интеграции
+- [Игровое время и календарь](./general/time_and_calendar_design.md)
+- [Обзор систем](./general/summary.md)
+- [Руководство по интеграции](./general/INTEGRATION_GUIDE.md)
 
 ---
 

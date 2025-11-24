@@ -37,7 +37,7 @@
 ### [📜 Нарратив и квесты](./5-narrative/)
 Истории и миссии, движущие игру вперёд.
 
-- [Побочные миссии](./5-narrative/mission-side-contraband-eden5.md) - Доставка контрабанды
+- [Побочные миссии](./5-narrative/mission_side_contraband_eden5.md) - Доставка контрабанды
 - [Система квестов](./5-narrative/quest-samples/index.md) - Примеры дизайна квестов
 
 ---

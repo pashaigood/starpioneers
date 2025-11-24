@@ -1,4 +1,4 @@
-﻿QuestSamples — набор примерных "moves" в JSON для быстрой проверки композиции квестов.
+﻿QuestSamples - набор примерных "moves" в JSON для быстрой проверки композиции квестов.
 
 Структура одного файла (пример):
 - id, title, description, tags, prereqs, consumes, produces, roles, complexity, branchingPoints, beats, narrativeMoves

@@ -1,4 +1,4 @@
-﻿# Planetary system design — Solar System (plan)
+﻿# Planetary system design - Solar System (plan)
 
 Goal
 - Create an extensible, data-driven planetary system for Unity.
@@ -37,7 +37,7 @@ Stylized relative sizes and distances (example, tweakable via scale factors)
 
 Core architecture / components
 - Data:
-  - CelestialBodyData (ScriptableObject) — fields:
+  - CelestialBodyData (ScriptableObject) - fields:
     - string name
     - float radius
     - float orbitRadius

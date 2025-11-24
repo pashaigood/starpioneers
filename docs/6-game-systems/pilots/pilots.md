@@ -1,17 +1,17 @@
-﻿# Pilots — Design notes (game-design level)
+﻿# Pilots - Design notes (game-design level)
 
-Цель: описать поведение NPC-пилотов (контроллер корабля) через систему потребностей → целей → задач → действий. Документ — руководство для реализации и балансировки, не детальный код, но с ясными интеграционными точками.
+Цель: описать поведение NPC-пилотов (контроллер корабля) через систему потребностей → целей → задач → действий. Документ - руководство для реализации и балансировки, не детальный код, но с ясными интеграционными точками.
 
 ## 1. Концепт
 Пилоты имеют набор долгоживущих потребностей, которые меняются очень медленно и формируют высокоуровневые мотивации (глобальные цели). Из глобальной цели пилот ставит краткосрочные цели (задачи) и план действий (action sequence). Решения зависят от состояния пилота, навыков, личности и ограничений (деньги, доступность станций и т.п.).
 
 Важно: поведение пилота зависит не только от его личных потребностей, но и от состояния корабля. План, генерируемый планировщиком, должен вставлять сервисные цели (заправка/ремонт) как предусловия перед выполнением действий, требующих перемещения.
 
-Основные потребности (0..100, 0 — идеал/сыто, 100 — критично):
+Основные потребности (0..100, 0 - идеал/сыто, 100 - критично):
 - Hunger (Голод)
 - Comfort (Комфорт / экипировка / жилище)
 - Entertainment (Развлечения / досуг / мораль)
-- SelfActualization (Самореализация — карьерный рост, достижения)
+- SelfActualization (Самореализация - карьерный рост, достижения)
 
 Потребности изменяются очень медленно (часы/дни в игровых секундах).
 
@@ -46,7 +46,7 @@ Planner должен:
 Вычисление применить:
 delta = (ratePerHour / 3600.0f) * dt
 
-## 5. Приоритет целей — обновлённая формула
+## 5. Приоритет целей - обновлённая формула
 Для каждой потребности вычисляем urgency; затем учитывать MoneyFactor и ShipFactor:
 
 - urgency = NeedValue * (1 + PersonalityModifier)
@@ -85,14 +85,14 @@ score = urgency * ShipWeight / (1 + MoneyFactor)
 ### Comfort (обновление)
 - Комфорт покрывает желание апгрейда/ремонта и социальный комфорт.
 - Для ремонта/улучшения корабля Planner формирует GoalChain: [EarnMoney? -> Travel -> Dock -> Repair/Upgrade]
-- Часть "comfort via social" реализуется через VisitBarGoal (платный) — уменьшает Comfort/Entertainment.
+- Часть "comfort via social" реализуется через VisitBarGoal (платный) - уменьшает Comfort/Entertainment.
 
 ## 7. Goal / Task types (минимальный набор, дополнение)
 - TravelToLocationGoal(locationId)
 - BuyItemGoal(itemType, amount)
 - Trade(route, buyStation, sellStation)
 - UpgradeShipGoal(partType)
-- RestGoal(duration) — уменьшает Fatigue, повышает Morale
+- RestGoal(duration) - уменьшает Fatigue, повышает Morale
 - TakeMissionGoal(missionId)
 - Socialize / VisitBarGoal(locationId)
 - RefuelShipGoal(stationId, amount)
@@ -102,7 +102,7 @@ score = urgency * ShipWeight / (1 + MoneyFactor)
 
 Каждый Goal имеет preconditions, estimatedCost, success/failure handlers, priorityScore.
 
-## 8. Planner — интеграция действий и проверка предусловий
+## 8. Planner - интеграция действий и проверка предусловий
 - Simulate loop:
   - UpdateNeeds(dt)
   - Compute urgencies
@@ -111,7 +111,7 @@ score = urgency * ShipWeight / (1 + MoneyFactor)
     - выбрать нужный тип цели
     - найти ближайшие станции/сервисы
     - оценить расстояния и fuelNeeded
-    - вызвать EnsureShipSupportGoals — вставить Refuel/Repair/EarnMoney если нужно
+    - вызвать EnsureShipSupportGoals - вставить Refuel/Repair/EarnMoney если нужно
     - вернуть GoalChain, где первые элементы обеспечивают технические предусловия
 
 ## 9. Псевдо-код примера: PlanEntertainmentGoal
@@ -141,7 +141,7 @@ private Goal PlanEntertainmentGoal(PilotModel pilot, PilotNeeds needs)
 }
 ```
 
-## 10. EarnMoneyGoal — базовый контракт
+## 10. EarnMoneyGoal - базовый контракт
 - На MVP EarnMoneyGoal может быть stub: мгновенный приток credits (для упрощённого тестирования поведения).
 - В полной версии: EarnMoneyGoal выполняет поиск миссии/трейда и ставит подзадачи (Travel -> Trade -> Sell) для получения дохода.
 - Planner должен учитывать risk/time tradeoff при выборе источника заработка.

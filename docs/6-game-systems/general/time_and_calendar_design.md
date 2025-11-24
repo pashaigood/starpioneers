@@ -1,11 +1,11 @@
-﻿# Дизайн системы времени и календаря — Star Pioneers (упрощённый)
+﻿# Дизайн системы времени и календаря - Star Pioneers (упрощённый)
 
-Цель: минимально необходимая спецификация TimeManager — хранить и управлять глобальным множителем времени (timeScale) и предоставлять игровой календарь (SimDate) для подписки другими системами.
+Цель: минимально необходимая спецификация TimeManager - хранить и управлять глобальным множителем времени (timeScale) и предоставлять игровой календарь (SimDate) для подписки другими системами.
 
 ## Основные требования (минимум)
 1. TimeManager обязан:
    - Хранить и менять глобальный множитель времени (TimeScale).
-   - Поддерживать паузу (IsPaused) — при паузе симуляционное время не увеличивается.
+   - Поддерживать паузу (IsPaused) - при паузе симуляционное время не увеличивается.
    - Предоставлять структуру календаря (SimDate) и преобразования Tick ↔ SimDate.
    - Сохранять/восстанавливать текущее время (CurrentTick или SimDate) для сохранения/загрузки.
    - Выбрасывать событие при изменении TimeScale (OnTimeScaleChanged).
@@ -20,9 +20,9 @@
    - `bool IsPaused { get; set; }`
    - `long CurrentTick { get; }`
    - `SimDate CurrentDate { get; }`
-   - void SetTimeScale(float value) — вызывает OnTimeScaleChanged
+   - void SetTimeScale(float value) - вызывает OnTimeScaleChanged
    - `event Action<float> OnTimeScaleChanged`
-   - void SaveState(Serializer s) / void LoadState(Serializer s) — сохранять CurrentTick и TimeScale
+   - void SaveState(Serializer s) / void LoadState(Serializer s) - сохранять CurrentTick и TimeScale
 
 ## Интеграция (простая)
 - Все системы, которые меняют или читают скорость мира, должны использовать TimeManager.Instance.TimeScale вместо прямых изменений в SimulationManager.
@@ -38,13 +38,13 @@
 - При сохранении состояния сохранять:
   - CurrentTick (long)
   - TimeScale (float)
-- При загрузке — восстановить CurrentTick → recompute CurrentDate и уведомить подписчиков при необходимости.
+- При загрузке - восстановить CurrentTick → recompute CurrentDate и уведомить подписчиков при необходимости.
 
 ## Переходной план (минимум)
 1. Добавить TimeManager skeleton с TimeScale, IsPaused, CurrentTick, SimDate, событиями и методами Save/Load.
 2. Обновить PlayerUIController: менять TimeManager.TimeScale вместо GenericSimulationManager.GlobalTimeScale.
-3. Обновить NPCSimpleController/GenericSimulationManager по чтению TimeScale (без изменения логики частот) — минимальная интеграция.
+3. Обновить NPCSimpleController/GenericSimulationManager по чтению TimeScale (без изменения логики частот) - минимальная интеграция.
 
 ## Примечание
-Это минимальная, лёгкая для внедрения спецификация. Дополнительные механики (аккумулятор, catch‑up, сложный планировщик) — отдельные расширения, не обязательные сейчас.
+Это минимальная, лёгкая для внедрения спецификация. Дополнительные механики (аккумулятор, catch-up, сложный планировщик) - отдельные расширения, не обязательные сейчас.
 

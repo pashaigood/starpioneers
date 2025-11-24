@@ -1,4 +1,4 @@
-﻿# Planet UI — Спецификация UI компонентов
+﻿# Planet UI - Спецификация UI компонентов
 
 ## Обзор компонентов
 
@@ -16,7 +16,7 @@ PlanetCardRoot
 │   ├── StatusBadgesSection (пригодность, специализация, фракция)
 │   └── ActionsSection (кредиты, кнопки взлёта и карты)
 ├── MainContentArea
-│   ├── VisualPanel (левая панель — визуализация планеты)
+│   ├── VisualPanel (левая панель - визуализация планеты)
 │   │   ├── PlanetPreview (3D preview или видео)
 │   │   └── StatsBar (основные характеристики)
 │   └── ServicesPanel (правая панель)
@@ -40,8 +40,8 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.planet-card-root` — полноэкранный контейнер
-- `.planet-card-root--hidden` — модификатор для скрытия
+- `.planet-card-root` - полноэкранный контейнер
+- `.planet-card-root--hidden` - модификатор для скрытия
 
 **Стили**:
 ```css
@@ -81,9 +81,9 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.background-layer` — фиксированный фон
-- `.planet-background` — изображение планеты
-- `.parallax-stars` — параллакс слой со звёздами
+- `.background-layer` - фиксированный фон
+- `.planet-background` - изображение планеты
+- `.parallax-stars` - параллакс слой со звёздами
 
 **Стили**:
 ```css
@@ -137,11 +137,11 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.header-section` — базовый стиль секции header
-- `.header-section--left` — выравнивание влево
-- `.icon-button` — стиль иконочной кнопки
-- `.planet-name` — стиль названия планеты (H1)
-- `.view-key-icon` — маленькая иконка view key
+- `.header-section` - базовый стиль секции header
+- `.header-section--left` - выравнивание влево
+- `.icon-button` - стиль иконочной кнопки
+- `.planet-name` - стиль названия планеты (H1)
+- `.view-key-icon` - маленькая иконка view key
 
 **Стили**:
 ```css
@@ -186,8 +186,8 @@ PlanetCardRoot
 
 **Функционал**:
 - Кнопка "Назад" → закрывает карточку (или возвращает в систему)
-- Название планеты — отображает `planet.Name`
-- View key icon — визуальный индикатор типа планеты
+- Название планеты - отображает `planet.Name`
+- View key icon - визуальный индикатор типа планеты
 
 ### 3.2 StatusBadgesSection
 
@@ -218,11 +218,11 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.badge` — базовый стиль бейджа
-- `.badge--habitability` / `.badge--specialization` / `.badge--faction` — модификаторы
-- `.badge-bar` — контейнер прогресс-бара
-- `.badge-bar-fill` — заполнение прогресс-бара
-- `.reputation-bar` — бар репутации с фракцией
+- `.badge` - базовый стиль бейджа
+- `.badge--habitability` / `.badge--specialization` / `.badge--faction` - модификаторы
+- `.badge-bar` - контейнер прогресс-бара
+- `.badge-bar-fill` - заполнение прогресс-бара
+- `.reputation-bar` - бар репутации с фракцией
 
 **Стили**:
 ```css
@@ -277,9 +277,9 @@ PlanetCardRoot
 ```
 
 **Функционал**:
-- Habitability бар — цвет меняется от красного (низкая) до зелёного (высокая)
-- Specialization — иконка специализации планеты
-- Faction — показывает фракцию и репутацию игрока (Friendly/Neutral/Hostile)
+- Habitability бар - цвет меняется от красного (низкая) до зелёного (высокая)
+- Specialization - иконка специализации планеты
+- Faction - показывает фракцию и репутацию игрока (Friendly/Neutral/Hostile)
 - Tooltip при наведении с подробностями
 
 ### 3.3 ActionsSection
@@ -294,10 +294,10 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.header-section--right` — выравнивание вправо
-- `.player-credits` — стиль отображения кредитов
-- `.header-button` — стиль кнопки в header
-- `.header-button--primary` — главная CTA кнопка (Takeoff)
+- `.header-section--right` - выравнивание вправо
+- `.player-credits` - стиль отображения кредитов
+- `.header-button` - стиль кнопки в header
+- `.header-button--primary` - главная CTA кнопка (Takeoff)
 
 **Стили**:
 ```css
@@ -341,7 +341,7 @@ PlanetCardRoot
 ```
 
 **Функционал**:
-- Player credits — обновляется при событии `OnCreditsChanged`
+- Player credits - обновляется при событии `OnCreditsChanged`
 - Map button → открывает карту системы
 - Takeoff button → валидация (топливо, здоровье), затем взлёт
 
@@ -383,10 +383,10 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.visual-panel` — левая панель (60% ширины)
-- `.planet-preview` — контейнер превью планеты
-- `.stats-bar` — горизонтальный ряд статов
-- `.stat-pill` — одна "таблетка" со статом
+- `.visual-panel` - левая панель (60% ширины)
+- `.planet-preview` - контейнер превью планеты
+- `.stats-bar` - горизонтальный ряд статов
+- `.stat-pill` - одна "таблетка" со статом
 
 **Стили**:
 ```css
@@ -445,10 +445,10 @@ PlanetCardRoot
 ```
 
 **Функционал**:
-- Planet preview — загружает 3D RenderTexture или видео-петлю
+- Planet preview - загружает 3D RenderTexture или видео-петлю
 - Параллакс при движении мыши (опционально)
 - Клик для поворота, двойной клик для fullscreen
-- Stats bar — tooltip с подробной информацией при наведении
+- Stats bar - tooltip с подробной информацией при наведении
 
 ### 4.2 ServicesPanel (правая панель)
 
@@ -468,9 +468,9 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.services-panel` — правая панель (40% ширины)
-- `.service-list` — прокручиваемый список сервисов
-- `.service-detail-panel` — панель деталей выбранного сервиса
+- `.services-panel` - правая панель (40% ширины)
+- `.service-list` - прокручиваемый список сервисов
+- `.service-detail-panel` - панель деталей выбранного сервиса
 
 **Стили**:
 ```css
@@ -512,10 +512,10 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.service-tile` — карточка сервиса
-- `.service-tile--selected` — модификатор для выбранного
-- `.service-icon` — иконка сервиса
-- `.service-quick-button` — быстрая кнопка действия
+- `.service-tile` - карточка сервиса
+- `.service-tile--selected` - модификатор для выбранного
+- `.service-icon` - иконка сервиса
+- `.service-quick-button` - быстрая кнопка действия
 
 **Стили**:
 ```css
@@ -715,9 +715,9 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.quick-actions-bar` — горизонтальная панель действий
-- `.quick-action-button` — кнопка быстрого действия
-- `.quick-action-button--primary` — главная кнопка (Takeoff)
+- `.quick-actions-bar` - горизонтальная панель действий
+- `.quick-action-button` - кнопка быстрого действия
+- `.quick-action-button--primary` - главная кнопка (Takeoff)
 
 **Стили**:
 ```css
@@ -758,7 +758,7 @@ PlanetCardRoot
 **Функционал**:
 - Хоткеи T, F, R, M, S
 - Кнопки всегда видны и доступны
-- На мобильных — FAB (Floating Action Button) с раскрывающимся меню
+- На мобильных - FAB (Floating Action Button) с раскрывающимся меню
 
 ---
 
@@ -786,9 +786,9 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.activity-log-bar` — нижняя панель журнала
-- `.activity-log-entry` — одна запись в журнале
-- `.undo-button` — кнопка отмены (видна 5-10 сек)
+- `.activity-log-bar` - нижняя панель журнала
+- `.activity-log-entry` - одна запись в журнале
+- `.undo-button` - кнопка отмены (видна 5-10 сек)
 
 **Стили**:
 ```css
@@ -849,7 +849,7 @@ PlanetCardRoot
 **Функционал**:
 - Автоматическое добавление записей при транзакциях
 - Кнопка Undo видна 5-10 секунд после транзакции
-- При клике на Undo — откат транзакции (если возможно)
+- При клике на Undo - откат транзакции (если возможно)
 
 ---
 
@@ -885,10 +885,10 @@ PlanetCardRoot
 ```
 
 **USS классы**:
-- `.modal-overlay` — полупрозрачный оверлей
-- `.modal-content` — содержимое модала
-- `.preflight-checklist` — список проверок перед взлётом
-- `.check-icon--ok` / `.check-icon--warning` / `.check-icon--error` — иконки статуса
+- `.modal-overlay` - полупрозрачный оверлей
+- `.modal-content` - содержимое модала
+- `.preflight-checklist` - список проверок перед взлётом
+- `.check-icon--ok` / `.check-icon--warning` / `.check-icon--error` - иконки статуса
 
 **Стили**:
 ```css

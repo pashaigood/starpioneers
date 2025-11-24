@@ -81,11 +81,11 @@
 
 ## 2. Компоненты системы
 
-### 2.1 PilotNeeds — Система потребностей
+### 2.1 PilotNeeds - Система потребностей
 
-(См. оригинал — без изменений по базовым полям, оставляем Hunger/Comfort/Entertainment/SelfActualization и методы UpdateNeeds, GetMostUrgentNeed, SatisfyNeed)
+(См. оригинал - без изменений по базовым полям, оставляем Hunger/Comfort/Entertainment/SelfActualization и методы UpdateNeeds, GetMostUrgentNeed, SatisfyNeed)
 
-### 2.2 ShipNeeds — новый компонент (потребности корабля)
+### 2.2 ShipNeeds - новый компонент (потребности корабля)
 
 Ответственность:
 - Хранение состояний корабля, которые влияют на поведение пилота (топливо, состояние/повреждения, необходимость ремонта).
@@ -114,10 +114,10 @@ public float RepairCostMultiplier = 1.0f; // множитель цены рем�
 Интеграция:
 - Planner перед созданием целей для пилота вызывает EnsureShipOperational(pilot, ship, plannedDistanceEstimate).
 - Если топлива не хватает, вставляется цепочка: FindNearestPlanetWithService(Repair|Dock|Fuel) → TravelTo → Dock → Refuel (RefuelShipGoal).
-- Если ремонт нужен — аналогично: вставить RepairShipGoal.
-- Refuel и Repair — цель, которая вызывает у CelestialModel соответствующие сервисы (Fuel/Repair/Shop).
+- Если ремонт нужен - аналогично: вставить RepairShipGoal.
+- Refuel и Repair - цель, которая вызывает у CelestialModel соответствующие сервисы (Fuel/Repair/Shop).
 
-### 2.3 PilotGoalPlanner — Планировщик целей (обновлённый)
+### 2.3 PilotGoalPlanner - Планировщик целей (обновлённый)
 
 Ответственность:
 - Анализ потребностей пилота и состояния корабля.
@@ -144,7 +144,7 @@ public Goal PlanNextGoal(PilotModel pilot, PilotNeeds needs)
 
     // 4. Получить оценку расстояний/времени для mainGoal (например, target planet position)
     // 5. Проверить состояние корабля: нужен ли Refuel/Repair перед выполнением mainGoal?
-    // 6. Если нужен Refuel/Repair — обернуть mainGoal в GoalChain: [Refuel/Repair, mainGoal]
+    // 6. Если нужен Refuel/Repair - обернуть mainGoal в GoalChain: [Refuel/Repair, mainGoal]
     return EnsureShipSupportGoals(pilot, mainGoal);
 }
 ```
@@ -157,11 +157,11 @@ public Goal PlanNextGoal(PilotModel pilot, PilotNeeds needs)
 - Если ship.CurrentFuel < fuelNeeded:
   - EarnMoney не нужен только ради топлива если есть Credits >= refuelCost
   - Вставить RefuelGoal (или EarnMoneyGoal -> Refuel -> Travel -> Buy)
-- Если пилоту нужен Entertainment -> VisitBarGoal (Bar тратит Credits и удовлетворяет Entertainment). Если Credits недостаточно — EarnMoneyGoal inserted.
+- Если пилоту нужен Entertainment -> VisitBarGoal (Bar тратит Credits и удовлетворяет Entertainment). Если Credits недостаточно - EarnMoneyGoal inserted.
 
-### 2.4 GoalQueue — Очередь целей
+### 2.4 GoalQueue - Очередь целей
 
-(Как в оригинале — без изменений; важно: GoalChain теперь может содержать сервисные цели: RefuelShipGoal, RepairShipGoal, VisitBarGoal)
+(Как в оригинале - без изменений; важно: GoalChain теперь может содержать сервисные цели: RefuelShipGoal, RepairShipGoal, VisitBarGoal)
 
 ---
 
@@ -193,7 +193,7 @@ public Goal PlanNextGoal(PilotModel pilot, PilotNeeds needs)
   2. TravelTo -> Dock -> RestGoal(внутри бара) или отдельная операция VisitBar, которая списывает Credits за время/услугу и снижает Entertainment.
   3. Если Credits недостаточно: вставить EarnMoneyGoal перед VisitBarGoal.
 
-Примечание: бар — платная услуга. Для простоты: VisitBarGoal вызывает `TryPurchase("Drink", qty=1)` через API планеты, который делегирует вызов к `MarketModule` планеты; если не хватает денег или товара, цель провалена и планировщик ставит `EarnMoneyGoal`.
+Примечание: бар - платная услуга. Для простоты: VisitBarGoal вызывает `TryPurchase("Drink", qty=1)` через API планеты, который делегирует вызов к `MarketModule` планеты; если не хватает денег или товара, цель провалена и планировщик ставит `EarnMoneyGoal`.
 
 ---
 
@@ -210,7 +210,7 @@ ShipModel (существующий) уже содержит базовые по
 
 Safety rules:
 - safetyReserve рассчитывается как минимальное количество топлива, чтобы добраться до ближайшей заправки + небольшой запас.
-- Если нет доступных заправок в радиусе — планировщик должен выбирать EarnMoney/TradeGoal чтобы накопить и/или избегать дальних поездок.
+- Если нет доступных заправок в радиусе - планировщик должен выбирать EarnMoney/TradeGoal чтобы накопить и/или избегать дальних поездок.
 
 ---
 
@@ -333,7 +333,7 @@ private Goal EnsureShipSupportGoals(PilotModel pilot, Goal mainGoal)
 ## 11. Баланс и тюнинг
 
 - Настройте price/stock для Fuel и RepairService в defaultMarket для планет.
-- SafetyFuelReserve — величина в литрах/единицах топлива, необходимая, чтобы добраться до ближайшей станции.
+- SafetyFuelReserve - величина в литрах/единицах топлива, необходимая, чтобы добраться до ближайшей станции.
 - Refuel/Repair должны иметь временные лимиты и таймауты резерва дока.
 - VisitBar прибавляет Entertainment и Morale, но расходует Credits.
 
@@ -354,7 +354,7 @@ MVP тесты:
 
 ## 13. Заключение
 
-Добавление потребностей корабля и платных баров существенно повышает реализм поведения NPC. Пилотский планировщик обязан учитывать не только внутренние потребности пилота, но и состояние корабля — иначе пилоты будут застревать в невозможных задачах (поездки без топлива и т.д.). Внедрение описанных целей и сервисов в планетные ассеты (CelestialBodyData) позволит дизайнерам гибко настраивать, где доступны заправки, ремонт и бары.
+Добавление потребностей корабля и платных баров существенно повышает реализм поведения NPC. Пилотский планировщик обязан учитывать не только внутренние потребности пилота, но и состояние корабля - иначе пилоты будут застревать в невозможных задачах (поездки без топлива и т.д.). Внедрение описанных целей и сервисов в планетные ассеты (CelestialBodyData) позволит дизайнерам гибко настраивать, где доступны заправки, ремонт и бары.
 
-*Файлы и кодовые изменения — следующие шаги: обновить планировщик (PilotGoalPlanner), добавить новые Goal-типы (RefuelShipGoal, RepairShipGoal, VisitBarGoal), расширить `CelestialModel` API и использовать `MarketModule`. После подтверждения приступаю к реализации.*
+*Файлы и кодовые изменения - следующие шаги: обновить планировщик (PilotGoalPlanner), добавить новые Goal-типы (RefuelShipGoal, RepairShipGoal, VisitBarGoal), расширить `CelestialModel` API и использовать `MarketModule`. После подтверждения приступаю к реализации.*
 

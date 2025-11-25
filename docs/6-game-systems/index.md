@@ -56,12 +56,7 @@
 
 - [Репутация и механики фракций](./factions/faction_system.md)
 
-### [Общие системы](./general/summary.md)
-Кросс-системные элементы и руководства по интеграции.
 
-- [Игровое время и календарь](./general/time_and_calendar_design.md)
-- [Обзор систем](./general/summary.md)
-- [Руководство по интеграции](./general/INTEGRATION_GUIDE.md)
 
 ---
 
